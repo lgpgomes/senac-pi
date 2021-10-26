@@ -14,9 +14,9 @@
 ### Tabelas:
 
 #### Serviço:
-- id
-- descricao
-- status (ativo - inativo)
+- ID
+- Descrição
+- Status (Ativo - Inativo)
 
 #### Agendamento:
 - ID
