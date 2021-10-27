@@ -12,23 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: x.html');
     }
     else {
-        echo '<script>
-        $(".form-control").each(function(){
-            $(this).on("blur", function(){
-                if($(this).val().trim() != "") {
-                    $(this).addClass("erro");
-                }
-                else {
-                    $(this).removeClass("erro");
-                }
-            })    
-        })</script>';
+        $erro = '<div class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
     }
-
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -64,10 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a href="index.html"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
+                    <a href="../index.html#home"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class='offcanvas offcanvas-start' data-bs-scroll="true" tabindex='-1' id='offcanvasExample' aria-labelledby='offcanvasExampleLabel'>
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title">Menu</h5>
@@ -77,19 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="mx-auto"></div>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#home">Home</a>
+                                    <a class="nav-link text-white" href="../index.html#home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#servicos">Serviços</a>
+                                    <a class="nav-link text-white" href="../index.html#servicos">Serviços</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#sobre">Sobre</a>
+                                    <a class="nav-link text-white" href="../index.html#sobre">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#contato">Contato</a>
+                                    <a class="nav-link text-white" href="../index.html#contato">Contato</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#agendamento">Agendamento</a>
+                                    <a class="nav-link text-white" href="../index.html#agendamento">Agendamento</a>
                                 </li>
                             </ul>
                         </div>
@@ -107,11 +93,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="card-body">
                             <form action="login.php" method="POST">
-                                <div class="input-group form-group py-2">
+                                <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     <input type="text" name="email" class="form-control" placeholder="Email" required>
                                 </div>
-                                <div class="input-group form-group py-2">
+                                <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                     <input type="password" name="senha" class="form-control" placeholder="Senha" required>
                                 </div>
@@ -121,6 +107,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="form-group py-2">
                                     <input type="submit" value="Login" class="btn float-right login_btn" >
                                 </div>
+                                <?php
+                                if(!empty($erro)) {
+                                    echo $erro;
+                                    unset($erro);
+                                }
+                                ?>
                             </form>
                         </div>
                         <div class="card-footer">
@@ -140,5 +132,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--Javascript-->
     <script src="../assets/js/main.js"></script>
-
 </html>

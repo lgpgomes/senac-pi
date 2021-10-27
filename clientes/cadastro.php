@@ -1,6 +1,7 @@
 <?php
 require './cliente.php';
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $nome = $_POST['nome'];
@@ -9,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     
     Cadastrar($nome, $senha, $confirmar_senha, $email);
+    
 }
 ?>
 <!DOCTYPE html>
@@ -44,9 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a href="index.html"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
+                    <a href="../index.html#home"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                <span class="navbar-toggler-icon"></span></button>
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class='offcanvas offcanvas-start' data-bs-scroll="true" tabindex='-1' id='offcanvasExample' aria-labelledby='offcanvasExampleLabel'>
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title">Menu</h5>
@@ -56,19 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="mx-auto"></div>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#home">Home</a>
+                                    <a class="nav-link text-white" href="../index.html#home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#servicos">Serviços</a>
+                                    <a class="nav-link text-white" href="../index.html#servicos">Serviços</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#sobre">Sobre</a>
+                                    <a class="nav-link text-white" href="../index.html#sobre">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#contato">Contato</a>
+                                    <a class="nav-link text-white" href="../index.html#contato">Contato</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="index.html#agendamento">Agendamento</a>
+                                    <a class="nav-link text-white" href="../index.html#agendamento">Agendamento</a>
                                 </li>
                             </ul>
                         </div>
@@ -76,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </nav>
         </header>
-        </header>
+
         <section class="login-section" id="login-section">
             <div class="container" id="login">
                 <div class="d-flex justify-content-center h-100">
@@ -85,41 +88,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <h3>Faça seu Cadastro</h3>
                         </div>
                         <div class="card-body">
+
                             <form action="cadastro.php" method="POST">
-                                <div class="input-group form-group py-2">
+                                <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     <input type="text" name="nome" class="form-control" placeholder="Nome" required>
                                 </div>
-                                <div class="input-group form-group py-2">
+                                <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                     <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
-                                <div class="input-group form-group py-2">
+                                <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                     <input type="password" name="senha" class="form-control" placeholder="Senha" required>
                                 </div>
-                                <div class="input-group form-group py-2">
+                                <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-shield"></i></span>
                                     <input type="password" name="confirmar_senha" class="form-control" placeholder="Confirmar Senha" required>
                                 </div>
                                 <div class="form-group py-2">
                                     <input type="submit" value="Cadastrar" class="btn float-right login_btn" >
                                 </div>
-                                <div id="erro">
-
-                                </div>
+                                <!--PHP-->
+                                <?php
+                                if(!empty( $_SESSION['msg'])) {
+                                    echo $_SESSION['msg'];
+                                    unset($_SESSION['msg']);
+                                }
+                                ?>
                             </form>
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-center links">
-                                <a href="login.php">Fazer Login</a>
+                               <span>Prefiro <a href="login.php">Fazer Login</a></span>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
     </body>
     <!--JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -127,5 +135,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--Javascript-->
     <script src="../assets/js/main.js"></script>
+
+    <script>
+        //Remove a classe msgErro apos 5s
+        setTimeout(function() {
+            $("#msg").fadeOut().empty();
+        }, 5000);
+    </script>
 
 </html>

@@ -1,2 +1,2 @@
-[] Colocar require nos campos de cliente;
-[] 
+- [x] Colocar required nos campos de cliente;
+- [] 

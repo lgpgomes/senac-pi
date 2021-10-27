@@ -4,7 +4,17 @@ body {
   overflow: hidden;
 }
 
-
+/*Alerts login/cadastro*/
+.msgErro, .msgSucesso {
+  font-size: 14px !important;
+  color: rgb(157, 25, 25);
+}
+.msgSucesso {
+  color: rgb(25, 157, 73);
+}
+.msgErro > i, .msgSucesso > i{
+  padding-right:4px;
+}
 
 /*Header*/
 .navbar .navbar-collapse  {
@@ -554,33 +564,33 @@ footer {
 .login-section {
 	width: 100%;
 	height: 100vh;
-  background:  linear-gradient(0deg, rgba(0, 0, 0, 0.190), rgba(0, 0, 0, 0.800)), url('../img/bg-02.jpg') no-repeat;
+  background:  linear-gradient(0deg, rgba(0, 0, 0, 0.190), rgba(0, 0, 0, 0.800)), url('../img/bg-02.jpg') no-repeat right 50% bottom 90%;
   background-size: cover; 
 }
 .login-section #login {
-    height: 100%;
-    align-content: center;
-}
-.login-section #cadastro-card {
-    height: 410px !important;
+  height: 100%;
+  align-content: center;
 }
 .login-section #login-card, .login-section #cadastro-card {
-  height: 350px;
+  height: auto;
   margin-top: auto;
   margin-bottom: auto;
   width: 400px;
   background-color: rgba(0, 0, 0, 0.400) !important;
 }
 .login-section.card-header h3 {
-    color: white;
+  color: white;
+}
+.login-section .card-body{
+  padding: 1.2rem 1rem !important;
 }
 .login-section span .input-group-text {
-    background-color: #c7c7c7;
-    border: 0 !important;
-    color: #121214;
+  background-color: #c7c7c7;
+  border: 0 !important;
+  color: #121214;
 }
 .login-section input:focus {
-    box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 .login-section .form-control {
   border: 1px solid #c7c7c7;
@@ -588,34 +598,35 @@ footer {
 .login-section .form-control:focus {
   border: 1px solid #c7c7c7 !important;
 }
-.remember {
-    color: white;
+.login-section .remember {
+  color: white;
 }
-.remember input {
-    width: 20px;
-    height: 20px;
-    margin-left: 15px;
-    margin-right: 5px;
+.login-section .remember input {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
 }
-.login_btn {
-    color: #c5c5c5;
-    border: 2px solid #c7c7c7;
-    padding: 4px 20px;
-    transition: .3s;
+.login-section .login_btn {
+  color: #c5c5c5;
+  border: 2px solid #c7c7c7;
+  padding: 4px 20px;
+  transition: .3s;
 }
-.login_btn:hover {
-    background-color: #c7c7c7;
-    transition: .3s;
+.login-section .login_btn:hover {
+  color: #121214;
+  background-color: #c7c7c7;
+  transition: .3s;
 }
-.card-footer a {
+.login-section .card-footer a {
   color: #c7c7c7;
   text-decoration: none;
   font-size: 15px;
 }
-.card-footer a:hover {
+.login-section .card-footer a:hover {
   text-decoration: underline;
 }
-.card-footer {
+.login-section .card-footer {
   text-decoration: none;
   font-size: 15px;
 }
