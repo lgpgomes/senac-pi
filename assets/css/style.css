@@ -562,13 +562,9 @@ footer {
     align-content: center;
 }
 .login-section #cadastro-card {
-    height: 410px;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 400px;
-    background-color: rgba(0, 0, 0, 0.400) !important;
+    height: 410px !important;
 }
-.login-section #login-card {
+.login-section #login-card, .login-section #cadastro-card {
   height: 350px;
   margin-top: auto;
   margin-bottom: auto;
@@ -583,7 +579,7 @@ footer {
     border: 0 !important;
     color: #121214;
 }
-input:focus {
+.login-section input:focus {
     box-shadow: 0 0 0 0 !important;
 }
 .login-section .form-control {

@@ -1,9 +1,41 @@
 
+<?php
+require './cliente.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    if(Logar($email, $senha)){
+        header('Location: x.html');
+    }
+    else {
+        echo '<script>
+        $(".form-control").each(function(){
+            $(this).on("blur", function(){
+                if($(this).val().trim() != "") {
+                    $(this).addClass("erro");
+                }
+                else {
+                    $(this).removeClass("erro");
+                }
+            })    
+        })</script>';
+    }
+
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <!--Favicon-->
-        <link rel="shortcut icon" href="./assets/img/favicon.png">
+        <link rel="shortcut icon" href="../assets/img/favicon.png">
         <meta charset="UTF-8" />
         <!--Fonte-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +47,7 @@
         <!--Bootstrap CSS-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <!--CSS-->
-        <link rel="stylesheet" href="./assets/css/style.css"> 
+        <link rel="stylesheet" href="../assets/css/style.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body databs-spy="scroll" data-bs-target=".nav-bg">
@@ -32,7 +64,7 @@
             </div>
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a href="index.html"><img src="./assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
+                    <a href="index.html"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -74,14 +106,14 @@
                             <h3>Faça seu Login</h3>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="login.php" method="POST">
                                 <div class="input-group form-group py-2">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="text" class="form-control" placeholder="Usuário">
+                                    <input type="text" name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="input-group form-group py-2">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                                    <input type="password" class="form-control" placeholder="Senha">
+                                    <input type="password" name="senha" class="form-control" placeholder="Senha" required>
                                 </div>
                                 <div class="row align-items-center remember py-2">
                                     <input type="checkbox">Lembrar-me
@@ -93,7 +125,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-center links">
-                                <span><a href="cadastro.html">Criar Cadastro</a> ou <a href="#sextou">Resetar Senha</a></span>
+                                <span><a href="cadastro.php">Criar Cadastro</a> ou <a href="#sextou">Resetar Senha</a></span>
                             </div>
 
                         </div>
@@ -107,6 +139,6 @@
     <!--Bootstrap JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--Javascript-->
-    <script src="./assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 
 </html>
