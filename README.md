@@ -2,7 +2,7 @@
 
 - [x] Fazer a tela principal
 - [x] Fazer a tela de login/cadastro
-- [ ] Cadastro de Cliente
+- [x] Cadastro de Cliente
 - [ ] Cadastro de Funcionario
 - [ ] Cadastro de Serviço
 - [ ] Histórico de agendamentos
