@@ -1,6 +1,6 @@
 <?php
 require './cliente.php';
-
+$MensagemErro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -9,7 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmar_senha = $_POST['confirmar_senha'];
     $email = $_POST['email'];
     
-    Cadastrar($nome, $senha, $confirmar_senha, $email);
+    if ($senha != $confirmar_senha) {
+        $_SESSION['msg1'] = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>As Senhas Não Coincidem!</span></div>';
+    }    
+
+    $MensagemErro = Cadastrar($nome, $senha, $confirmar_senha, $email);
     
 }
 ?>
@@ -92,29 +96,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <form action="cadastro.php" method="POST">
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="text" name="nome" class="form-control" placeholder="Nome" required>
+                                    <input type="text" name="nome" class="form-control" placeholder="Nome" >
                                 </div>
+
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Email" >
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                                    <input type="password" name="senha" class="form-control" placeholder="Senha" required>
+                                    <input type="password" name="senha" class="form-control" placeholder="Senha" >
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-shield"></i></span>
-                                    <input type="password" name="confirmar_senha" class="form-control" placeholder="Confirmar Senha" required>
+                                    <input type="password" name="confirmar_senha" class="form-control" placeholder="Confirmar Senha" >
                                 </div>
                                 <div class="form-group py-2">
                                     <input type="submit" value="Cadastrar" class="btn float-right login_btn" >
                                 </div>
                                 <!--PHP-->
                                 <?php
-                                if(!empty( $_SESSION['msg'])) {
-                                    echo $_SESSION['msg'];
-                                    unset($_SESSION['msg']);
-                                }
+                                echo $MensagemErro;
                                 ?>
                             </form>
                         </div>
@@ -136,11 +138,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!--Javascript-->
     <script src="../assets/js/main.js"></script>
 
-    <script>
-        //Remove a classe msgErro apos 5s
-        setTimeout(function() {
-            $("#msg").fadeOut().empty();
-        }, 5000);
-    </script>
+
 
 </html>

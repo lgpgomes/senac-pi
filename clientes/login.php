@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: x.html');
     }
     else {
-        $erro = '<div class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
+        $erro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
     }
 }
 ?>
@@ -132,4 +132,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--Javascript-->
     <script src="../assets/js/main.js"></script>
+    <script>
+    //Remove a classe msgErro apos 5s
+        setTimeout(function() {
+            $("#msg").fadeOut().empty();
+        }, 5000);
+    </script>
 </html>
