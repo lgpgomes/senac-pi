@@ -1,7 +1,7 @@
 
 <?php
 require './cliente.php';
-
+$MensagemErro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -12,9 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: x.html');
     }
     else {
-        $erro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
-    }
-}
+        $MensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
+    }}
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <form action="login.php" method="POST">
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="text" name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
@@ -108,10 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="submit" value="Login" class="btn float-right login_btn" >
                                 </div>
                                 <?php
-                                if(!empty($erro)) {
-                                    echo $erro;
-                                    unset($erro);
-                                }
+                                echo $MensagemErro;
                                 ?>
                             </form>
                         </div>
@@ -119,7 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="d-flex justify-content-center links">
                                 <span><a href="cadastro.php">Criar Cadastro</a> ou <a href="#sextou">Resetar Senha</a></span>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -136,6 +131,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Remove a classe msgErro apos 5s
         setTimeout(function() {
             $("#msg").fadeOut().empty();
-        }, 5000);
+        }, 6000);
     </script>
 </html>

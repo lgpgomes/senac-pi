@@ -4,17 +4,7 @@ body {
   overflow: hidden;
 }
 
-/*Alerts login/cadastro*/
-.msgErro, .msgSucesso {
-  font-size: 14px !important;
-  color: rgb(157, 25, 25);
-}
-.msgSucesso {
-  color: rgb(25, 157, 73);
-}
-.msgErro > i, .msgSucesso > i{
-  padding-right:4px;
-}
+
 
 /*Header*/
 .navbar .navbar-collapse  {
@@ -629,4 +619,15 @@ footer {
 .login-section .card-footer {
   text-decoration: none;
   font-size: 15px;
+}
+/*Alerts login/cadastro*/
+.msgErro, .msgSucesso {
+  font-size: 14px !important;
+  color: rgb(160, 25, 25);
+}
+.msgSucesso {
+  color: rgb(25, 157, 73);
+}
+.msgErro > i, .msgSucesso > i{
+  padding-right:4px;
 }

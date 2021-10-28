@@ -1,6 +1,7 @@
 
 (function ($) {
     "use strict";
+
     //Verifica se tem valor form contato
     $('.input').each(function(){
         $(this).on('blur', function(){

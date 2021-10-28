@@ -1,0 +1,174 @@
+body {
+  font-size: .875rem;
+  font-family: 'Oswald' !important;
+}
+.nav-logo {
+  height: 67px;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+ .conteudo {
+   margin-top: 1rem;
+ }
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 90px 0 0; 
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #fff;
+}
+.sidebar {
+  background-color: #121214 !important;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+}
+
+.nav-link.active, .nav-link:focus {
+  color: #c5c5c5 !important;
+}
+.nav-link:hover {
+  color: #c5c5c5;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+/*
+ * Navbar
+ */
+
+ .navbar-toggler:focus, .navbar-toggler {
+  font-size: 16px;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.516);
+}
+.navbar {
+  padding: 8px 12px !important;
+  background-color: #121214 !important;
+}
+.offcanvas {
+  color: #fff;
+  background-color: #121214;
+  width : 55% !important;
+}
+.offcanvas[style="visibility: visible;"]{
+  padding: 2%;
+}
+.offcanvas .offcanvas-title {
+  text-align: center;
+}
+.offcanvas-body {
+  padding: 0;
+  padding-top: 20px;
+}
+.offcanvas a {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 550;
+}
+.offcanvas-start {
+  border: 0;
+}
+.nav-link {
+  padding: 10px 16px;
+}
+
+/*Preloader*/
+#preloader {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:#121214;
+  z-index: 9999; 
+}
+#preloader .inner {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);  
+}
+.bolas > div {
+  display: inline-block;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  margin: 3px;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  animation-name: animarBola;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.bolas > div:nth-child(1) {
+  animation-duration:0.75s ;
+  animation-delay: 0;
+}
+.bolas > div:nth-child(2) {
+  animation-duration: 0.75s ;
+  animation-delay: 0.12s;
+}
+.bolas > div:nth-child(3) {
+  animation-duration: 0.75s  ;
+  animation-delay: 0.24s;
+}
+
+@keyframes animarBola {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  16% {
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
+    opacity: 0.7;
+  }
+  33% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1; 
+  } 
+}
+
+@media only screen and (max-width: 780px) {
+  .nav-logo {
+    max-height: 59px;
+  }
+}

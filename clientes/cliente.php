@@ -13,9 +13,6 @@ function Cadastrar($nome, $senha, $confirmar_senha, $email)
         return $erro;
     }
 
-    if (ValidarClienteExiste($email) > 0) {
-        return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Usuário Já Existe!</span> </div>';
-    }
 
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,7 +36,6 @@ function Logar($email, $senha)
         session_start();
         $_SESSION['usuario_tipo'] = $dados['tipo'];
         $_SESSION['usuario_id'] = $dados['id'];
-
         return true;
     } else {
         return false;
@@ -61,12 +57,27 @@ function ValidarClienteExiste($email)
 }
 
 function validarCampo($email, $nome, $senha, $confirmar_senha) {
+
     if(empty($nome)) {
          return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Nome Em Branco!</span> </div>';
     }
     if(empty($email)) {
         return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email Em Branco!</span> </div>';
     }
+    if (ValidarClienteExiste($email) > 0) {
+        return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Usuário Já Existe!</span> </div>';
+    }
+    if(empty($senha)) {
+        return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Senha Em Branco!</span> </div>';
+    }
+    if(empty($confirmar_senha)) {
+        return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Confirmar Senha Em Branco!</span> </div>';
+    }
+    if ($senha != $confirmar_senha) {
+        return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>As Senhas Não Coincidem!</span></div>';
+    }  
+
+
     return "";
 }
 ?>
