@@ -1,6 +1,8 @@
 
 <?php
-require './cliente.php';
+require '../clientes/cliente.php';
+require '../usuario/usuario.php';
+
 $MensagemErro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,12 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    if(Logar($email, $senha)){
-        header('Location: x.html');
+    $usuario = new Usuario($email, $senha);
+
+    if($usuario -> Logar($email, $senha)) {
+        header('Location: ../dashboard/dashboard.php');
     }
     else {
         $MensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
-    }}
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-center links">
-                                <span><a href="cadastro.php">Criar Cadastro</a> ou <a href="#sextou">Resetar Senha</a></span>
+                                <span><a href="../clientes/cadastro.php">Criar Cadastro</a> ou <a href="#sextou">Resetar Senha</a></span>
                             </div>
                         </div>
                     </div>

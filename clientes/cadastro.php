@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-center links">
-                               <span>Prefiro <a href="login.php">Fazer Login</a></span>
+                               <span>Prefiro <a href="../login/login.php">Fazer Login</a></span>
                             </div>
                         </div>
                     </div>

@@ -67,10 +67,6 @@ body {
   text-transform: uppercase;
 }
 
-/*
- * Navbar
- */
-
  .navbar-toggler:focus, .navbar-toggler {
   font-size: 16px;
   box-shadow: none;

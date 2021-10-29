@@ -1,9 +1,12 @@
 <?php
-session_start();
-//$tipo = $_SESSION['usuario_tipo'];
-$tipo = 2;
+require '../usuario/usuario.php';
 
+session_start();
+$tipo = $_SESSION['usuario'] -> get_tipo();
+
+$usuario =  $_SESSION['usuario'];
 ?>
+
 
 <?php
 if($tipo == 2){
@@ -21,7 +24,7 @@ if($tipo == 2){
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Dashboard do usuário</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link href="dashboard.css" rel="stylesheet">
+        <link href="../assets/css/dashboard.css" rel="stylesheet">
     </head>
     <body>
         <div id="preloader">
@@ -40,7 +43,7 @@ if($tipo == 2){
 
             <div class="navbar-nav ">
                 <div class="nav-item text-nowrap">
-                <a class="nav-link px-3 d-none d-md-block" href="#"><span data-feather="log-out"></span> Sair</a>
+                <a class="nav-link px-3 d-none d-md-block" href="../login/logout.php"><span data-feather="log-out"></span> Sair</a>
                 </div>
             </div>
 
@@ -131,7 +134,8 @@ if($tipo == 2){
                 </nav>
                 
             <main class="conteudo col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                    
+                <h2>Olá, <?php echo $usuario -> get_nome(); ?>!</h2>
+
                 <h2>Agendamentos Anteriores</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -141,33 +145,11 @@ if($tipo == 2){
                                 <th scope="col">Hora</th>
                                 <th scope="col">Barbearia</th>
                                 <th scope="col">Serviço</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>24/11/2021</td>
-                                <td>13:00</td>
-                                <td>Salão</td>
-                                <td>Corte</td>
-                            </tr>
-                            <tr>
-                                <td>26/11/2021</td>
-                                <td>10:00</td>
-                                <td>Salão</td>
-                                <td>Corte</td>
-                            </tr>
-                            <tr>
-                                <td>02/12/2021</td>
-                                <td>11:00</td>
-                                <td>Salão</td>
-                                <td>Corte</td>
-                            </tr>
-                            <tr>
-                                <td>28/12/2021</td>
-                                <td>14:00</td>
-                                <td>Salão</td>
-                                <td>Corte</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>

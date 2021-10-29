@@ -13,7 +13,6 @@ function Cadastrar($nome, $senha, $confirmar_senha, $email)
         return $erro;
     }
 
-
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO usuario(`Nome`, `Senha`, `Email`, Tipo, Status) VALUES (?,?,?,?,?)";
@@ -22,25 +21,6 @@ function Cadastrar($nome, $senha, $confirmar_senha, $email)
     Banco::desconectar();
 }
 
-function Logar($email, $senha)
-{
-    $pdo = Banco::conectar();
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $insert = "SELECT Email, Senha, Tipo, ID FROM usuario WHERE Email = ? AND Senha = ? AND Status = 1";
-    $q = $pdo->prepare($insert);
-    $q->execute(array($email, $senha));
-    $dados = $q -> fetch(PDO::FETCH_ASSOC);
-    Banco::desconectar();
-    
-    if($q -> rowCount() > 0){
-        session_start();
-        $_SESSION['usuario_tipo'] = $dados['tipo'];
-        $_SESSION['usuario_id'] = $dados['id'];
-        return true;
-    } else {
-        return false;
-    }
-}
 
 
 function ValidarClienteExiste($email)
