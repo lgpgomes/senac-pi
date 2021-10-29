@@ -9,7 +9,6 @@
 - [ ] Dashboard Admin
 - [ ] Dashboard Estabelecimento
 - [x] Histórico de agendamentos
-- [ ] Tabela -> Agendar serviços -> Tela de Agendamento
 - [ ] Tela de Agendamento
 
 ### Tabelas:
