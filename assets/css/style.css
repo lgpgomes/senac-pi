@@ -19,7 +19,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.516);
 }
 .nav-bg {
-  background-color: #121214cd;
+  background-color: #121214fa;
   transition: .2s;
 }
 .nav-logo {
@@ -203,6 +203,7 @@ body {
   background-color: #121214;
   padding: 6%;
 }
+
 .contact-section .btn {
   padding: 2px 6px;
   background-color: none;
@@ -527,9 +528,9 @@ footer {
   .cta-section .btn {
     font-size: 13px;
   }
-  .services-section, .about-section {
-    padding-top: 12%;
-    padding-bottom: 12%;
+  .services-section, .about-section, .contact-section {
+    padding-top: 20%;
+    padding-bottom: 20%;
   }
   .contact-section .btn {
     font-size: 0.8rem;
@@ -545,8 +546,26 @@ footer {
     padding: 72px 15px 90px 15px;
   }
 }
-
-
+@media only screen and (min-width: 316px) and (min-height: 716px)  {
+  footer {
+    padding: 5em 0;
+  }
+}
+@media only screen and (min-width: 370px) and (min-height: 800px)  {
+  footer {
+    padding: 7em 0;
+  }
+}
+@media only screen and (min-width: 716px) and (min-height: 1000px)  {
+  footer {
+    padding: 15em 0;
+  }
+}
+@media only screen and (min-width: 1000px) and (min-height: 1366px)  {
+  footer {
+    padding: 25em 0;
+  }
+}
 
 
 

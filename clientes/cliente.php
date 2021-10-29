@@ -17,11 +17,9 @@ function Cadastrar($nome, $senha, $confirmar_senha, $email)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO usuario(`Nome`, `Senha`, `Email`, Tipo, Status) VALUES (?,?,?,?,?)";
     $q = $pdo->prepare($insert);
-    $q->execute(array($nome, $senha, $email, TIPO_USUARIO_CLIENTE, STATUS_CLIENTE_ATIVO));
+    $q->execute(array(ucwords($nome), $senha, $email, TIPO_USUARIO_CLIENTE, STATUS_CLIENTE_ATIVO));
     Banco::desconectar();
 }
-
-
 
 function ValidarClienteExiste($email)
 {
@@ -56,7 +54,6 @@ function validarCampo($email, $nome, $senha, $confirmar_senha) {
     if ($senha != $confirmar_senha) {
         return '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>As Senhas Não Coincidem!</span></div>';
     }  
-
 
     return "";
 }

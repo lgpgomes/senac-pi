@@ -59,7 +59,6 @@ class Usuario {
             session_start();
 
             $usuario = new Usuario();
-
             $usuario -> set_nome($dados['Nome']);
             $usuario -> set_email($dados['Email']);
             $usuario -> set_senha($dados['Senha']);
@@ -70,6 +69,7 @@ class Usuario {
             $_SESSION['usuario'] = $usuario;
 
             return true;
+
         } else {
             return false;
         }

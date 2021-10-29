@@ -66,13 +66,13 @@ if($tipo == 2){
             <div class="offcanvas-body">
                 <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">
+                    <a class="nav-link " aria-current="page" href="dashboard.php">
                     <span data-feather="home"></span>
                     Principal
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="agendamento.php">
+                    <a class="nav-link active" href="#">
                     <span data-feather="calendar"></span>
                     Agendamentos
                     </a>
@@ -105,13 +105,13 @@ if($tipo == 2){
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
+                                <a class="nav-link " aria-current="page" href="dashboard.php">
                                 <span data-feather="home"></span>
                                 Principal
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="agendamento.php">
+                                <a class="nav-link active" href="#">
                                 <span data-feather="calendar"></span>
                                 Agendamentos
                                 </a>
@@ -127,33 +127,63 @@ if($tipo == 2){
                 </nav>
                 
             <main class="conteudo col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <h2>Olá, <?php echo $usuario -> get_nome(); ?>!</h2>
-                <h2>Agendamentos Anteriores</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Data</th>
-                                <th scope="col">Hora</th>
-                                <th scope="col">Barbearia</th>
-                                <th scope="col">Serviço</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupAgendamento">
+                    Sextou
+                </button>
+                
+                <div class="modal fade" id="popupAgendamento" tabindex="-1" aria-labelledby="popupAgendamentoLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg  modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Faça Seu Agendamento</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="#" class="form-agendamento">
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-sm-6">
+                                            <input type="date" class="form-control" id="data" placeholder="Data">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="time" class="form-control" id="hora" placeholder="Hora">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select name="" id="" class="form-select">
+                                                <option selected>Serviço</option>
+                                                <option value="">Corte de Cabelo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select name="" id="" class="form-select">
+                                                <option selected>Estabelecimento</option>
+                                                <option value="">Barbearia dos Amigos</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Messagem"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>      
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary">Agendar Agora</button>
+                            </div>
+                        </div>
+                     </div>
+                </div>                          
             </main>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+            <script src="../assets/js/main.js"></script>
+            <script> feather.replace()</script>
         </body>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="../assets/js/main.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script>
-        feather.replace()
-        </script>
+
 </html>
+
 <?php
 }
 ?>
