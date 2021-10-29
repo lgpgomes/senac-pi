@@ -5,31 +5,12 @@
 - [x] Cadastro de Cliente
 - [ ] Cadastro de Funcionario
 - [ ] Cadastro de Serviço
-- [ ] Histórico de agendamentos
-- [ ] Consulta de agendamentos
-- [ ] Tabela -> Agendar serviços -> Tela de Agendamento
+- [x] Dashboard Cliente
+- [ ] Dashboard Admin
+- [ ] Dashboard Estabelecimento
+- [x] Histórico de agendamentos
 - [ ] Tela de Agendamento
 
-### Tabelas:
-
-#### Serviço:
-- ID
-- Descrição
-- Status (Ativo - Inativo)
-
-#### Agendamento:
-- ID
-- Tipo de Serviço (ID da tabela serviço)
-- Data e Hora (1 hora de intervalo)
-- Status (concluído|Pendente)
-
-#### Usuário
-- ID
-- Nome
-- Senha
-- Email
-- Tipo (0 - ADM | 1 - Funcionário | 2 - Cliente)
-- Status (ativo - inativo)
 
 #### Papéis:
 
