@@ -1,4 +1,5 @@
 <?php
+require '../banco/banco.php';
 require '../usuario/usuario.php';
 session_start();
 
@@ -10,6 +11,8 @@ if(!isset($_SESSION['usuario'])) {
 $tipo = $_SESSION['usuario'] -> get_tipo();
 
 $usuario =  $_SESSION['usuario'];
+$resultado = obterFuncionarios();
+
 ?>
 
 
@@ -142,21 +145,33 @@ if($tipo == 2){
                                 <form action="#" class="form-agendamento">
                                     <div class="row g-3 align-items-center">
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" id="data" placeholder="Data">
+                                            <input type="date" min="<?php echo date('Y-m-d');?>" max="2021-12-25" class="form-control" id="data" placeholder="Data">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="time" class="form-control" id="hora" placeholder="Hora">
+                                        <select name="" id="" class="form-select">
+                                                <option selected>08:00</option>
+                                                <option value="">09:00</option>
+                                                <option value="">10:00</option>
+                                                <option value="">11:00</option>
+                                                <option value="">12:00</option>
+                                                <option value="">13:00</option>
+                                                <option value="">14:00</option>
+                                                <option value="">15:00</option>
+                                                <option value="">16:00</option>
+                                                <option value="">17:00</option>
+                                                <option value="">18:00</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <select name="" id="" class="form-select">
-                                                <option selected>Serviço</option>
+                                                <option selected>Serviços</option>
                                                 <option value="">Corte de Cabelo</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <select name="" id="" class="form-select">
-                                                <option selected>Estabelecimento</option>
-                                                <option value="">Barbearia dos Amigos</option>
+                                                <option selected>Profissional</option>
+                                                <?php echo $resultado;?>
                                             </select>
                                         </div>
                                         <div class="col-md-12">
@@ -179,7 +194,7 @@ if($tipo == 2){
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
             <script src="../assets/js/main.js"></script>
-            <script> feather.replace()</script>
+            <script> feather.replace();</script>
         </body>
 
 </html>

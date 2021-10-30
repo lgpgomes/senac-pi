@@ -75,4 +75,17 @@ class Usuario {
         }
     }
 }
+
+function obterFuncionarios() {
+    $pdo = Banco::conectar();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $consulta = "SELECT Nome FROM usuario WHERE Tipo = 1";
+    Banco::desconectar();
+    $resultado = 0;
+    foreach($pdo -> query($consulta) as $row) {
+        $resultado = $resultado.'<option>'. $row['Nome'] .'</option>';
+    }
+
+    return $resultado;
+}
 ?>

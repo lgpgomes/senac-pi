@@ -1,4 +1,5 @@
 <?php
+require '../banco/banco.php';
 require '../usuario/usuario.php';
 session_start();
 
@@ -10,6 +11,7 @@ if(!isset($_SESSION['usuario'])) {
 $tipo = $_SESSION['usuario'] -> get_tipo();
 
 $usuario =  $_SESSION['usuario'];
+
 ?>
 
 
