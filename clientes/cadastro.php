@@ -1,15 +1,19 @@
 <?php
 require './cliente.php';
-$MensagemErro = "";
+$Mensagem = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
     $confirmar_senha = $_POST['confirmar_senha'];
     $email = $_POST['email'];
-    
-    $MensagemErro = Cadastrar($nome, $senha, $confirmar_senha, $email);
+
+    $Mensagem = cadastrarCliente($nome, $senha, $confirmar_senha, $email);
+
+    if(empty($Mensagem)) {
+        $Mensagem = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i> <span>Sucesso! Redirecionando...</span> </div>';
+        header('Refresh: 3; ../login/login.php');
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -90,11 +94,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <form action="cadastro.php" method="POST">
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="text" name="nome" class="form-control" placeholder="Nome" required>
+                                    <input type="text" <?php if (!empty($_POST['nome'])){echo "value=\"".$_POST["nome"]."\"";}?> name="nome" class="form-control" placeholder="Nome" required>
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email"  <?php if (!empty($_POST['email'])){echo "value=\"".$_POST["email"]."\"";}?> name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
@@ -109,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                                 <!--PHP-->
                                 <?php
-                                echo $MensagemErro;
+                                echo $Mensagem;
                                 ?>
                             </form>
                         </div>
@@ -134,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Remove a classe msgErro apos 5s
     setTimeout(function() {
         $("#msg").fadeOut().empty();
-    }, 6000);
+    }, 3500);
     </script>
 
 </html>

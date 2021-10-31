@@ -2,6 +2,17 @@ body {
   font-size: .875rem;
   font-family: 'Oswald' !important;
 }
+/*Alerts login/cadastro*/
+.msgErro, .msgSucesso {
+  font-size: 14px !important;
+  color: rgb(160, 25, 25);
+}
+.msgSucesso {
+  color: rgb(25, 157, 73);
+}
+.msgErro > i, .msgSucesso > i{
+  padding-right:4px;
+}
 
 /*Header*/
 .nav-logo {
@@ -92,7 +103,6 @@ body {
 .nav-link:hover {
   color: #c5c5c5;
 }
-
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
   color: inherit;

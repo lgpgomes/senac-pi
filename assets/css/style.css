@@ -109,6 +109,8 @@ body {
 
 
 
+
+
 /*Call To Action*/
 .cta-section { 
     padding-top: 40px; padding-bottom: 40px; 
@@ -360,6 +362,9 @@ body {
 
 
 /*Footer*/
+footer {
+  padding: 3em 0;
+}
 .ftco-footer-social li {
   list-style: none;
   margin: 0 10px 0 0;
@@ -387,9 +392,6 @@ body {
 }
 .ftco-section {
   padding: 12em 0;
-}
-footer {
-  padding: 3em 0;
 }
 .footer {
   background: #121212;
@@ -499,6 +501,9 @@ footer {
 
 /*Responsividade*/
 @media only screen and (max-width: 780px) {
+  .services-section, .about-section, .contact-section {
+    padding: 20% 6%;
+  }
   .nav-bg .nav-logo, .nav-logo {
     max-height: 59px;
   }
@@ -527,10 +532,6 @@ footer {
   }
   .cta-section .btn {
     font-size: 13px;
-  }
-  .services-section, .about-section, .contact-section {
-    padding-top: 20%;
-    padding-bottom: 20%;
   }
   .contact-section .btn {
     font-size: 0.8rem;

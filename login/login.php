@@ -6,10 +6,8 @@ require '../usuario/usuario.php';
 $MensagemErro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-
     $usuario = new Usuario($email, $senha);
 
     if($usuario -> Logar($email, $senha)) {
@@ -19,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $MensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -137,6 +134,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Remove a classe msgErro apos 5s
         setTimeout(function() {
             $("#msg").fadeOut().empty();
-        }, 6000);
+        }, 5000);
     </script>
 </html>

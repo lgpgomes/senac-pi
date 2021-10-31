@@ -1,2 +1,0 @@
-- [x] Colocar required nos campos de cliente;
-- [] 

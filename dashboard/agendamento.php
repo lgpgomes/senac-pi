@@ -11,11 +11,9 @@ if(!isset($_SESSION['usuario'])) {
 $tipo = $_SESSION['usuario'] -> get_tipo();
 
 $usuario =  $_SESSION['usuario'];
-$resultado = obterFuncionarios();
-
+$profissionais = obterFuncionarios();
+$servicos = obterServicos();
 ?>
-
-
 <?php
 if($tipo == 2){
 ?>
@@ -46,13 +44,10 @@ if($tipo == 2){
         </div>
 
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap">
-
             <a href="../index.html#home"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
-
             <div class="navbar-nav ">
                 <div class="nav-item text-nowrap">
                 <a class="nav-link px-3 d-none d-md-block" href="../login/logout.php"><span data-feather="log-out"></span> Sair</a>
-                </div>
             </div>
 
             <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
@@ -62,9 +57,8 @@ if($tipo == 2){
         
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">            
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
-            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">MENU</h5>
+                <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="nav flex-column">
@@ -78,18 +72,6 @@ if($tipo == 2){
                     <a class="nav-link active" href="#">
                     <span data-feather="calendar"></span>
                     Agendamentos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <span data-feather="scissors"></span>
-                    Perfil
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                    <span data-feather="settings"></span>
-                    Configurações
                     </a>
                 </li>
                 <li class="nav-item">
@@ -119,12 +101,6 @@ if($tipo == 2){
                                 Agendamentos
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                <span data-feather="scissors"></span>
-                                Barbearias
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -145,33 +121,34 @@ if($tipo == 2){
                                 <form action="#" class="form-agendamento">
                                     <div class="row g-3 align-items-center">
                                         <div class="col-sm-6">
-                                            <input type="date" min="<?php echo date('Y-m-d');?>" max="2021-12-25" class="form-control" id="data" placeholder="Data">
+                                            <input type="date" min="<?php echo date('Y-m-d');?>" max="2023-12-25" class="form-control" name="data" placeholder="Data">
                                         </div>
                                         <div class="col-sm-6">
-                                        <select name="" id="" class="form-select">
-                                                <option selected>08:00</option>
-                                                <option value="">09:00</option>
-                                                <option value="">10:00</option>
-                                                <option value="">11:00</option>
-                                                <option value="">12:00</option>
-                                                <option value="">13:00</option>
-                                                <option value="">14:00</option>
-                                                <option value="">15:00</option>
-                                                <option value="">16:00</option>
-                                                <option value="">17:00</option>
-                                                <option value="">18:00</option>
+                                            <select name="" id="" class="form-select hour">
+                                                <option disabled selected>Hora</option>
+                                                <option>8h</option>
+                                                <option>9h</option>
+                                                <option>10h</option>
+                                                <option>11h</option>
+                                                <option>12h</option>
+                                                <option>13h</option>
+                                                <option>14h</option>
+                                                <option>15h</option>
+                                                <option>16h</option>
+                                                <option>17h</option>
+                                                <option>18h</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <select name="" id="" class="form-select">
-                                                <option selected>Serviços</option>
-                                                <option value="">Corte de Cabelo</option>
+                                                <option disabled selected>Serviços</option>
+                                                <?php echo $servicos;?>
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <select name="" id="" class="form-select">
-                                                <option selected>Profissional</option>
-                                                <?php echo $resultado;?>
+                                                <option disabled selected>Profissional</option>
+                                                <?php echo $profissionais;?>
                                             </select>
                                         </div>
                                         <div class="col-md-12">
@@ -194,7 +171,7 @@ if($tipo == 2){
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
             <script src="../assets/js/main.js"></script>
-            <script> feather.replace();</script>
+            <script> feather.replace()</script>
         </body>
 
 </html>

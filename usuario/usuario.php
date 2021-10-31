@@ -7,7 +7,6 @@ class Usuario {
     private $tipo;
     private $status;
 
-
     public function set_id($id) {
         $this -> id = $id;
     }
@@ -57,7 +56,6 @@ class Usuario {
         
         if($q -> rowCount() > 0) {
             session_start();
-
             $usuario = new Usuario();
             $usuario -> set_nome($dados['Nome']);
             $usuario -> set_email($dados['Email']);
@@ -65,11 +63,8 @@ class Usuario {
             $usuario -> set_tipo($dados['Tipo']);
             $usuario -> set_status($dados['Status']);
             $usuario -> set_id($dados['ID']);
-
             $_SESSION['usuario'] = $usuario;
-
             return true;
-
         } else {
             return false;
         }
@@ -79,13 +74,38 @@ class Usuario {
 function obterFuncionarios() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT Nome FROM usuario WHERE Tipo = 1";
+    $consulta = "SELECT Nome, ID FROM usuario WHERE Tipo = 1";
     Banco::desconectar();
-    $resultado = 0;
+    $profissional = "";
     foreach($pdo -> query($consulta) as $row) {
-        $resultado = $resultado.'<option>'. $row['Nome'] .'</option>';
+        $profissional .= '<option value="'.$row['ID'].'">'.$row['Nome'].'</option>';
     }
-
-    return $resultado;
+    return $profissional;
 }
+
+function obterServicos() {
+    $pdo = Banco::conectar();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $consulta = "SELECT DESCRICAO, ID FROM servico";
+    Banco::desconectar();
+    $servicos = "";
+    foreach($pdo -> query($consulta) as $row) {
+        $servicos .= '<option value="'.$row['ID'].'">'.$row['DESCRICAO'].'</option>';
+    }
+    return $servicos;
+}
+
+function obterAgendamentos($id) {
+    $pdo = Banco::conectar();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $consulta = "SELECT NOME, DATA_HORA, DESCRICAO FROM `usuario` INNER JOIN `agendamento` INNER JOIN `servico` ON agendamento.ID_CLIENTE = $id";
+
+    Banco::desconectar();
+    $agendamentosAnteriores = "";
+    foreach($pdo -> query($consulta) as $row) {
+        $agendamentosAnteriores .= '<tr> <td>'.$row['NOME'].'</td> <td>'.$row['DATA_HORA'].'</td> <td>'.$row['DESCRICAO'].'</td> <td>'.$row['DESCRICAO'].'</td> </tr>';
+    }
+    return $agendamentosAnteriores;
+}
+
 ?>
