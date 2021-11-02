@@ -3,13 +3,13 @@
 - [x] Fazer a tela principal
 - [x] Fazer a tela de login/cadastro
 - [x] Cadastro de Cliente
-- [ ] Cadastro de Funcionario
-- [ ] Cadastro de Serviço
-- [x] Dashboard Cliente
+- [x] Cadastro de Funcionario
+- [x] Cadastro de Serviço
+- [ ] Dashboard Cliente
 - [ ] Dashboard Admin
 - [ ] Dashboard Estabelecimento
-- [x] Histórico de agendamentos
-- [ ] Tela de Agendamento
+- [ ] Histórico de agendamentos
+- [x] Tela de Agendamento
 
 
 #### Papéis:
