@@ -1,12 +1,11 @@
 <?php
 require '../banco/banco.php';
 
+const TIPO_USUARIO_FUNCIONARIO = 1;
 const TIPO_USUARIO_CLIENTE = 2; 
-const STATUS_CLIENTE_ATIVO = 0; 
-const TIPO_USUARIO_FUNCIONARIO = 1; 
-const STATUS_FUNCIONARIO_ATIVO = 0; 
+const STATUS_ATIVO = 0; 
 
-function cadastrarCliente($nome, $senha, $confirmar_senha, $email)
+function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
 {
     $erro = validarCampo($email, $nome, $senha, $confirmar_senha);
 
@@ -18,26 +17,21 @@ function cadastrarCliente($nome, $senha, $confirmar_senha, $email)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO usuario(`Nome`, `Senha`, `Email`, Tipo, Status) VALUES (?,?,?,?,?)";
     $q = $pdo->prepare($insert);
-    $q->execute(array(ucwords($nome), $senha, $email, TIPO_USUARIO_CLIENTE, STATUS_CLIENTE_ATIVO));
+    $q->execute(array(ucwords($nome), $senha, $email, $tipo, STATUS_ATIVO));
     Banco::desconectar();
 }
 
-
-function cadastrarFuncionario($nome, $senha, $confirmar_senha, $email)
+function cadastrarServico($descricao)
 {
-    $erro = validarCampo($email, $nome, $senha, $confirmar_senha);
-
-    if (!empty($erro)) {
-        return $erro;
-    }
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $insert = "INSERT INTO usuario(`Nome`, `Senha`, `Email`, Tipo, Status) VALUES (?,?,?,?,?)";
+    $insert = "INSERT INTO servico(`Descricao`, Status) VALUES (?,?)";
     $q = $pdo->prepare($insert);
-    $q->execute(array(ucwords($nome), $senha, $email, TIPO_USUARIO_FUNCIONARIO, STATUS_FUNCIONARIO_ATIVO));
+    $q->execute(array(ucwords($descricao), STATUS_ATIVO));
     Banco::desconectar();
-}
 
+    return true;
+}
 
 function validarExistencia($email)
 {

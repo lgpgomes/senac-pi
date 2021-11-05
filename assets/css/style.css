@@ -184,6 +184,7 @@ body {
 }
 .about-section .item:hover {
   filter: brightness(69%);
+  cursor: pointer;
 }
 .about-section .item .text-white{
   margin: 0px;

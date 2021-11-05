@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'];
     $confirmar_senha = $_POST['confirmar_senha'];
     $email = $_POST['email'];
-    $Mensagem = cadastrarCliente($nome, $senha, $confirmar_senha, $email);
+    $Mensagem = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, TIPO_USUARIO_CLIENTE);
 
     if(isset($Mensagem)) {
         header('Location: dashboard.php');

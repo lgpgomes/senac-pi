@@ -1,4 +1,4 @@
-### Telas a fazer:
+### A fazer:
 
 - [x] Fazer a tela principal
 - [x] Fazer a tela de login/cadastro

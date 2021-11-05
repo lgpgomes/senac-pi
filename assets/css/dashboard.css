@@ -1,7 +1,26 @@
 body {
   font-size: .875rem;
   font-family: 'Oswald' !important;
+  background-color: rgba(205, 205, 205, 0.427)
 }
+
+.card {
+  color: #121214;
+}
+.card .p {
+  color: #a0a0a0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.card .feather {
+  width: 45px;
+  height: 45px;
+}
+.card:hover {
+  cursor: pointer;
+}
+
+
 /*Alerts login/cadastro*/
 .msgErro, .msgSucesso {
   font-size: 14px !important;
@@ -120,7 +139,7 @@ body {
   vertical-align: text-bottom;
 }
 .conteudo {
-  margin-top: 1rem;
+  padding-top: 1rem;
 }
 
 /*Preloader*/
@@ -130,7 +149,6 @@ body {
   left:0;
   right:0;
   bottom:0;
-  background-color:#121214;
   z-index: 9999; 
 }
 #preloader .inner {
