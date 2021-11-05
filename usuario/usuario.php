@@ -1,5 +1,5 @@
 <?php
-require 'C:\xamp\htdocs\senac-pi-main\clientes\cliente.php';
+require './clientes/cliente.php';
 
 class Usuario {
     private $id;

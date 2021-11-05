@@ -1,5 +1,5 @@
 <?php
-require 'C:\xamp\htdocs\senac-pi-main\banco\banco.php';
+require './banco/banco.php';
 
 const TIPO_USUARIO_FUNCIONARIO = 1;
 const TIPO_USUARIO_CLIENTE = 2; 
