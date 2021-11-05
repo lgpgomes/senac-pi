@@ -1,5 +1,6 @@
 <?php
 require './cliente.php';
+
 $Mensagem = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Mensagem = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, TIPO_USUARIO_CLIENTE);
 
     if(empty($Mensagem)) {
-        $Mensagem = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i> <span>Sucesso! Redirecionando...</span> </div>';
+        $Mensagem = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i><span>Sucesso! Redirecionando...</span> </div>';
         header('Refresh: 3; ../login/login.php');
     }
 }
@@ -62,19 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="mx-auto"></div>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#home">Home</a>
+                                    <a class="nav-link text-white" href="../#home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#servicos">Serviços</a>
+                                    <a class="nav-link text-white" href="../#servicos">Serviços</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#sobre">Sobre</a>
+                                    <a class="nav-link text-white" href="../#sobre">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#contato">Contato</a>
+                                    <a class="nav-link text-white" href="../#contato">Contato</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#agendamento">Agendamento</a>
+                                    <a class="nav-link text-white" href="../#agendamento">Agendamento</a>
                                 </li>
                             </ul>
                         </div>

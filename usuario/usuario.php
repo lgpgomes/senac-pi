@@ -1,4 +1,6 @@
 <?php
+require 'C:\xamp\htdocs\senac-pi-main\clientes\cliente.php';
+
 class Usuario {
     private $id;
     private $email;
@@ -86,26 +88,22 @@ function obterFuncionarios() {
 function obterServicos() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT DESCRICAO, ID FROM servico";
+    $consulta = "SELECT * FROM servico";
     Banco::desconectar();
-    $servicos = "";
-    foreach($pdo -> query($consulta) as $row) {
-        $servicos .= '<option value="'.$row['ID'].'">'.$row['DESCRICAO'].'</option>';
-    }
-    return $servicos;
+    return $pdo -> query($consulta);
 }
 
-function obterAgendamentos($id) {
+function obterAgendamentos($id, $tipo) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT NOME, DATA_HORA, DESCRICAO FROM `usuario` INNER JOIN `agendamento` INNER JOIN `servico` ON agendamento.ID_CLIENTE = $id";
-
-    Banco::desconectar();
-    $agendamentosAnteriores = "";
-    foreach($pdo -> query($consulta) as $row) {
-        $agendamentosAnteriores .= '<tr> <td>'.$row['NOME'].'</td> <td>'.$row['DATA_HORA'].'</td> <td>'.$row['DESCRICAO'].'</td> <td>'.$row['DESCRICAO'].'</td> </tr>';
+    if ($tipo == 1) {
+        $consulta = "SELECT agendamento.data_hora, usuario.nome, servico.descricao from agendamento, usuario, servico where agendamento.id_serv = servico.id and agendamento.id_cliente = usuario.id and id_funcionario = $id;";
+    } else {
+        $consulta = "SELECT agendamento.data_hora, usuario.nome, servico.descricao from agendamento, usuario, servico where agendamento.id_serv = servico.id and agendamento.id_funcionario = usuario.id and id_cliente = $id;";
     }
-    return $agendamentosAnteriores;
+    Banco::desconectar();
+    return $pdo -> query($consulta);
+
 }
 
 ?>

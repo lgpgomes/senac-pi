@@ -1,5 +1,4 @@
 <?php
-
 class Banco
 {
     private static $dbNome = 'dbbarber';

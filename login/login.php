@@ -1,6 +1,5 @@
 
 <?php
-require '../clientes/cliente.php';
 require '../usuario/usuario.php';
 
 $MensagemErro = "";
@@ -52,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a href="../index.html#home"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
+                    <a href="../#home"><img src="../assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -65,19 +64,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="mx-auto"></div>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#home">Home</a>
+                                    <a class="nav-link text-white" href="../#home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#servicos">Serviços</a>
+                                    <a class="nav-link text-white" href="../#servicos">Serviços</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#sobre">Sobre</a>
+                                    <a class="nav-link text-white" href="../#sobre">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#contato">Contato</a>
+                                    <a class="nav-link text-white" href="../#contato">Contato</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="../index.html#agendamento">Agendamento</a>
+                                    <a class="nav-link text-white" href="../#agendamento">Agendamento</a>
                                 </li>
                             </ul>
                         </div>

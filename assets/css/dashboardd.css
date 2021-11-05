@@ -1,23 +1,19 @@
 body {
   font-size: .875rem;
   font-family: 'Oswald' !important;
-  background-color: rgba(205, 205, 205, 0.427)
-}
-
-.card {
+  background-color: rgba(205, 205, 205, 0.427);
   color: #121214;
 }
+
 .card .p {
   color: #a0a0a0;
-  letter-spacing: 1px;
   text-transform: uppercase;
-}
-.card .feather {
-  width: 45px;
-  height: 45px;
 }
 .card:hover {
   cursor: pointer;
+  color: #121214cc !important;
+  border-color: #121214ec !important;
+  transition: .3s;
 }
 
 
@@ -58,7 +54,6 @@ body {
 /*Offcanvas*/
 .offcanvas {
   color: #fff;
-  background-color: #121214;
   width : 55% !important;
 }
 .offcanvas[style="visibility: visible;"]{
@@ -105,6 +100,7 @@ body {
 }
 
 .sidebar .nav-link {
+  cursor: pointer !important;
   font-weight: 500;
   color: #fff;
 }
@@ -139,7 +135,7 @@ body {
   vertical-align: text-bottom;
 }
 .conteudo {
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
 
 /*Preloader*/

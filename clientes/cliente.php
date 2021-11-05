@@ -1,5 +1,5 @@
 <?php
-require '../banco/banco.php';
+require 'C:\xamp\htdocs\senac-pi-main\banco\banco.php';
 
 const TIPO_USUARIO_FUNCIONARIO = 1;
 const TIPO_USUARIO_CLIENTE = 2; 
@@ -21,13 +21,13 @@ function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
     Banco::desconectar();
 }
 
-function cadastrarServico($descricao)
+function cadastrarServico($descricao, $imagem_nome, $icone_nome)
 {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $insert = "INSERT INTO servico(`Descricao`, Status) VALUES (?,?)";
+    $insert = "INSERT INTO servico(`Descricao`, `Imagem`, `Icone`, Status) VALUES (?,?,?,?)";
     $q = $pdo->prepare($insert);
-    $q->execute(array(ucwords($descricao), STATUS_ATIVO));
+    $q->execute(array(ucwords($descricao), $imagem_nome, $icone_nome, STATUS_ATIVO));
     Banco::desconectar();
 
     return true;

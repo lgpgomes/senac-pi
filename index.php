@@ -1,3 +1,9 @@
+<?php
+require './usuario/usuario.php';
+
+$pdo = obterServicos();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -85,50 +91,21 @@
     <!--Services-->
     <section class="services-section" id="servicos">
       <div class="container d-flex flex-wrap gap-5 justify-content-center">
-        <div class="container d-flex justify-content-center"><h2 class="display-6"><span style="opacity: 0.3;">NOSSOS</span>SERVIÇOS</h2></div>
-        <div class="card">
-          <img class="card-img" style="height: 15rem" src="https://www.lamafiabarbearia.com.br/wp-content/uploads/2017/10/corte.jpg" alt="Card image cap">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-            <img src="./assets/icons/tesoura.png" alt="" style="height: 60px;">
-            <h5 class="display-6">Corte Tesoura</h5>
-          </div>
+        <div class="container d-flex justify-content-center">
+            <h2 class="display-6 title-services"><span style="opacity: 0.3;">NOSSOS</span>SERVIÇOS</h2>
         </div>
+        <?php foreach($pdo as $row){ ?>
         <div class="card">
-          <img class="card-img" style="height: 15rem;" src="https://www.lamafiabarbearia.com.br/wp-content/uploads/2017/10/barba.jpg" alt="Card image cap">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-            <img src="./assets/icons/espuma.png" alt="" style="height: 60px;">
-            <h5 class="display-6">Barba</h5>
-          </div>
+            <div class="card-img d-flex align-items-center justify-content-center" style="background-image: url(./assets/uploads/img/<?php echo $row['IMAGEM'];?>);">
+                <div class="service">
+                    <img src="./assets/uploads/icons/<?php echo $row['ICONE'];?>" alt="icone">
+                    <p class="h2"><?php echo $row['DESCRICAO'];?></p>
+                </div>
+            </div>
         </div>
-        <div class="card">
-          <img class="card-img" style="height: 15rem;" src="https://www.lamafiabarbearia.com.br/wp-content/uploads/2017/10/maquina.jpg" alt="Card image cap">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-            <img src="./assets/icons/maquina.png" alt="" style="height: 60px;">
-            <h5 class="display-6">Corte Máquina</h5>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img" style="height: 15rem;" src="https://www.lamafiabarbearia.com.br/wp-content/uploads/2017/10/sobrancelha.jpg" alt="Card image cap">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-            <img src="./assets/icons/razor.png" alt="" style="height: 60px;">
-            <h5 class="display-6">Sobrancelha</h5>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img" style="height: 15rem;" src="https://www.lamafiabarbearia.com.br/wp-content/uploads/2017/10/pigmentacao.jpg" alt="Card image cap">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-            <img src="./assets/icons/espuma.png" alt="" style="height: 60px;">
-            <h5 class="display-6">Pigmentação</h5>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img" style="height: 15rem;" src="https://www.lamafiabarbearia.com.br/wp-content/uploads/2017/10/acabamentos.jpg" alt="Card image cap">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-            <img src="./assets/icons/navalha.png" alt="" style="height: 60px;">
-            <h5 class="display-6">Acabamentos</h5>
-          </div>
-        </div>
+        <?php } ?>
       </div>
+
     </section>
 
     <!--Sobre-->
@@ -140,14 +117,13 @@
           <div class="row gx-5 justify-content-center">
               <div class="col-lg-7">
                 <h3 class="title-about">Barba, Cabelo e Agendamento!</h3>
-                <p class="text-about">O MR. Barbers é um site de agendamento on-line para barbearias que permite gerenciar horários
+                <p class="text-about">O MR. Barber é um site de agendamento on-line para barbearias que permite gerenciar horários
                    de reservas com rapidez e flexibilidade, organizando a agenda e horários do estabelecimento. O usuário, por sua vez, poderá 
-                   marcar seus horários, além de poder verificar serviços, valores, localização e muito mais…</p>
+                   marcar seus horários, além de poder verificar serviços…</p>
                 <ul class="item-about" style="list-style: none; padding: 0;"> 
                   <li><i class="item-about fa fa-check-circle"></i> AGENDE SEUS HORÁRIOS.</li>
                   <li><i class="item-about fa fa-check-circle"></i> TOTALMENTE ONLINE.</li>
                   <li><i class="item-about fa fa-check-circle"></i> RÁPIDO E PRÁTICO.</li>
-                  <li><i class="item-about fa fa-check-circle"></i> ORGANIZAÇÃO E FLEXIBIDADE.</li>
                 </ul>
               </div>
               <div class="img-about col-lg-5">

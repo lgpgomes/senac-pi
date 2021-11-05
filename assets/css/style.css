@@ -87,25 +87,44 @@ body {
 
 
 /*Services*/
-.services-section .card {
-  background-color: none;
-  transition: .3s;
-  opacity: 0.6;
-  text-align: center;
-  border: none;
-  filter: grayscale(100%);
-}
-.services-section .card:hover, .services-section .card:focus  {
-  opacity: 1;
-  transition: .3s;
-  cursor: pointer;
-  filter: grayscale(0%);
-}
 .services-section {
   padding: 6%;
   background-color: #121214;
 }
-
+.services-section .card {
+  text-align: center;
+  background: none;
+  border: none;
+}
+.services-section .card-img {
+  height: 15rem;
+  width: 21rem;
+  transition: .3s;
+  border-radius: 5px !important;
+  background-size: cover !important;
+  background-position: center;
+  filter: grayscale(100%);
+  opacity: 0.9;
+}
+.services-section .card-img:hover {
+  cursor: pointer;
+  transition: .3s;
+  filter: grayscale(0%);
+  opacity: 1;
+}
+.card-img::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(225deg, rgba(0, 0, 0, 0.200), rgba(0, 0, 0, 0.900));
+}
+.services-section img {
+  height: 50px;
+}
+.services-section .service {
+  position: relative;
+}
 
 
 
@@ -156,7 +175,7 @@ body {
   margin: 0; 
 }
  .about-section .img-about{
-  filter:brightness(67%);
+  filter:brightness(60%);
   text-align: center;
 }
 .about-section .img-fluid {
@@ -183,7 +202,6 @@ body {
   border-radius: 15px;
 }
 .about-section .item:hover {
-  filter: brightness(69%);
   cursor: pointer;
 }
 .about-section .item .text-white{
@@ -206,20 +224,21 @@ body {
   background-color: #121214;
   padding: 6%;
 }
-
+.contact-section .display-6 {
+  color: #c5c5c5;
+}
 .contact-section .btn {
   padding: 2px 6px;
-  background-color: none;
-  color: #121214;
+  color: #c5c5c5;
   font-size: 15px;
-  border: 2px solid #121214;
+  border: 2px solid #c5c5c5;
   box-shadow: none;
   transition: .3s;
   opacity: 0.7;
 }
 .contact-section .btn:hover {
-  background-color: #121214;
-  color: #fff;
+  background-color: #c5c5c5;
+  color: #000;
   transition: .3s;
 }
 .contact-section input {
@@ -243,10 +262,11 @@ body {
 }
 .contact-section .wrap-contact {
   width: 700px;
-  background: #fff;
+  background: none;
   border-radius: 10px;
   overflow: hidden;
-  padding: 25px 50px;
+  border: 2px solid #c5c5c5;
+  padding: 18px 36px;
 }
 .contact-section .contact-form-title {
   display: block;
@@ -261,10 +281,11 @@ body {
   margin-bottom: 35px;
 }
 .contact-section .input {
+  background-color: #00000000;
   display: block;
   width: 100%;
   font-size: 15px;
-  color: #555555;
+  color: #c5c5c5;
   line-height: 1.2;
 }
 .contact-section .focus-input {
@@ -317,8 +338,8 @@ body {
   content: attr(data-validate);
   position: absolute;
   max-width: 70%;
-  background-color: white;
-  border: 1px solid #c80000;
+  background-color: none;
+  border: 1px solid rgb(160, 25, 25);
   border-radius: 2px;
   padding: 4px 25px 4px 10px;
   top: 50%;
@@ -329,7 +350,7 @@ body {
   transform: translateY(-50%);
   right: 0px;
   pointer-events: none;
-  color: #c80000;
+  color: rgb(160, 25, 25);
   font-size: 13px;
   line-height: 1.4;
   text-align: left;
@@ -345,7 +366,7 @@ body {
   font-family: FontAwesome;
   display: block;
   position: absolute;
-  color: #c80000;
+  color: rgb(160, 25, 25);
   font-size: 16px;
   top: 50%;
   -webkit-transform: translateY(-50%);
