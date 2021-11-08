@@ -66,7 +66,6 @@
         } else {
           nav.classList.remove('nav-bg');
         }
-      });
-      
+      });  
 
 })(jQuery);

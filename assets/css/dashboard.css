@@ -4,18 +4,22 @@ body {
   background-color: rgba(205, 205, 205, 0.427);
   color: #121214;
 }
+#spinner .loader {
+  top: 50%;
+  position: absolute;
+}
 
 .card .p {
   color: #a0a0a0;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 .card:hover {
   cursor: pointer;
-  color: #121214cc !important;
-  border-color: #121214ec !important;
+  color: #121214 !important;
+  border-color: #121214 !important;
   transition: .3s;
 }
-
 
 /*Alerts login/cadastro*/
 .msgErro, .msgSucesso {
@@ -29,16 +33,21 @@ body {
   padding-right:4px;
 }
 
+
+/*Header*/
+.agendavazia {
+  text-align: center;
+  height: 50vh;
+  text-transform: capitalize;
+  font-size: 24px;
+}
+
 /*Header*/
 .nav-logo {
   height: 67px;
 }
 .navbar {
   padding: 8px 12px !important;
-  background-color: #121214 !important;
-}
-.nav-link {
-  padding: 10px 16px;
 }
 .navbar-toggler:focus, .navbar-toggler {
   font-size: 16px;
@@ -104,9 +113,6 @@ body {
   font-weight: 500;
   color: #fff;
 }
-.sidebar {
-  background-color: #121214 !important;
-}
 
 .sidebar .nav-link .feather {
   margin-right: 4px;
@@ -117,10 +123,6 @@ body {
 }
 .nav-link:hover {
   color: #c5c5c5;
-}
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
 }
 
 .sidebar-heading {

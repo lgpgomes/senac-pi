@@ -1,5 +1,7 @@
 <?php
-require './clientes/cliente.php';
+const STATUS_AGENDAMENTO_PENDENTE = 1; 
+const STATUS_AGENDAMENTO_CANCELADO = 2; 
+const STATUS_AGENDAMENTO_CONCLUIDO = 3; 
 
 class Usuario {
     private $id;
@@ -50,7 +52,7 @@ class Usuario {
     {
         $pdo = Banco::conectar();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $insert = "SELECT Nome, Status, Email, Senha, Tipo, ID FROM usuario WHERE Email = ? AND Senha = ? AND Status = 0";
+        $insert = "SELECT Nome, Status, Email, Senha, Tipo, ID FROM usuario WHERE Email = ? AND Senha = ? AND Status = 1";
         $q = $pdo->prepare($insert);
         $q->execute(array($email, $senha));
         $dados = $q -> fetch(PDO::FETCH_ASSOC);
@@ -76,34 +78,29 @@ class Usuario {
 function obterFuncionarios() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT Nome, ID FROM usuario WHERE Tipo = 1";
+    $consulta = "SELECT ID, NOME, SENHA, EMAIL, TIPO, STATUS FROM usuario WHERE Tipo = 1";
     Banco::desconectar();
-    $profissional = "";
-    foreach($pdo -> query($consulta) as $row) {
-        $profissional .= '<option value="'.$row['ID'].'">'.$row['Nome'].'</option>';
-    }
-    return $profissional;
+    return $pdo -> query($consulta);
 }
 
 function obterServicos() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT * FROM servico";
+    $consulta = "SELECT ID, DESCRICAO, IMAGEM, ICONE, STATUS FROM servico";
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
 
-function obterAgendamentos($id, $tipo) {
+function obterAgendamentos($id, $tipo, $status) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if ($tipo == 1) {
-        $consulta = "SELECT agendamento.data_hora, usuario.nome, servico.descricao from agendamento, usuario, servico where agendamento.id_serv = servico.id and agendamento.id_cliente = usuario.id and id_funcionario = $id;";
+        $consulta = "SELECT agendamento.data_hora, usuario.nome, servico.descricao from agendamento, usuario, servico where agendamento.id_serv = servico.id and agendamento.id_cliente = usuario.id and id_funcionario = $id and agendamento.status = $status;";
     } else {
-        $consulta = "SELECT agendamento.data_hora, usuario.nome, servico.descricao from agendamento, usuario, servico where agendamento.id_serv = servico.id and agendamento.id_funcionario = usuario.id and id_cliente = $id;";
+        $consulta = "SELECT agendamento.data_hora, usuario.nome, servico.descricao from agendamento, usuario, servico where agendamento.id_serv = servico.id and agendamento.id_funcionario = usuario.id and id_cliente = $id and agendamento.status = $status;";
     }
     Banco::desconectar();
     return $pdo -> query($consulta);
-
 }
 
 ?>

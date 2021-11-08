@@ -1,9 +1,8 @@
 <?php
-require './banco/banco.php';
-
 const TIPO_USUARIO_FUNCIONARIO = 1;
-const TIPO_USUARIO_CLIENTE = 2; 
-const STATUS_ATIVO = 0; 
+const TIPO_USUARIO_CLIENTE = 2;
+const STATUS_USUARIO_ATIVO = 1; 
+const STATUS_SERVICO_ATIVO = 1; 
 
 function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
 {
@@ -17,7 +16,7 @@ function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO usuario(`Nome`, `Senha`, `Email`, Tipo, Status) VALUES (?,?,?,?,?)";
     $q = $pdo->prepare($insert);
-    $q->execute(array(ucwords($nome), $senha, $email, $tipo, STATUS_ATIVO));
+    $q->execute(array(ucwords($nome), $senha, $email, $tipo, STATUS_USUARIO_ATIVO));
     Banco::desconectar();
 }
 
@@ -27,9 +26,8 @@ function cadastrarServico($descricao, $imagem_nome, $icone_nome)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO servico(`Descricao`, `Imagem`, `Icone`, Status) VALUES (?,?,?,?)";
     $q = $pdo->prepare($insert);
-    $q->execute(array(ucwords($descricao), $imagem_nome, $icone_nome, STATUS_ATIVO));
+    $q->execute(array(ucwords($descricao), $imagem_nome, $icone_nome, STATUS_SERVICO_ATIVO));
     Banco::desconectar();
-
     return true;
 }
 
@@ -42,8 +40,18 @@ function validarExistencia($email)
     $q->execute(array($email));
     $dados = $q -> fetch(PDO::FETCH_ASSOC);
     Banco::desconectar();
-
     return $dados['quantidadeUsuarios'];
+}
+
+function agendar($idServico, $data, $status, $idFuncionario, $idCliente)
+{
+    $pdo = Banco::conectar();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $insert = "INSERT INTO `agendamento`(ID_SERV, DATA_HORA, STATUS, ID_FUNCIONARIO, ID_CLIENTE) VALUES (?,?,?,?,?)";
+    $q = $pdo->prepare($insert);
+    $q->execute(array($idServico, $data, $status, $idFuncionario, $idCliente));
+    Banco::desconectar();
+    return true;
 }
 
 function validarCampo($email, $nome, $senha, $confirmar_senha) {
@@ -71,4 +79,6 @@ function validarCampo($email, $nome, $senha, $confirmar_senha) {
     } 
     return "";
 }
+
+
 ?>
