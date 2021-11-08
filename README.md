@@ -5,10 +5,10 @@
 - [x] Cadastro de Cliente
 - [x] Cadastro de Funcionario
 - [x] Cadastro de Serviço
-- [ ] Dashboard Cliente
-- [ ] Dashboard Admin
-- [ ] Dashboard Estabelecimento
-- [ ] Histórico de agendamentos
+- [x] Dashboard Cliente
+- [x] Dashboard Admin
+- [x] Dashboard Estabelecimento
+- [x] Histórico de agendamentos
 - [x] Tela de Agendamento
 
 
