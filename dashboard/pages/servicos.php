@@ -4,7 +4,16 @@ require_once '../../usuario/usuario.php';
 require_once '../util/connection.php';
 ?>
 
-<p class="h5">Serviços</p>
+<div class="row">
+    <div class="col-auto">
+        <p class="h5">Serviços</p>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#popupServico">
+            Cadastrar Serviço
+        </button>
+    </div>
+</div>
 <table class="table table-sm table-striped table-hover">
     <thead>
         <tr id="tr">

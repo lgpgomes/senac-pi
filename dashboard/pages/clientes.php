@@ -3,15 +3,13 @@ require_once '../../banco/banco.php';
 require_once '../../usuario/usuario.php';
 require_once '../util/connection.php';
 ?>
-
-
 <div class="row">
     <div class="col-auto">
-        <p class="h5">Funcionários</p>
+        <p class="h5">Cliente</p>
     </div>
     <div class="col-auto">
-        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#popupFuncionario">
-            Cadastrar Funcionário
+        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#popupCliente">
+            Cadastrar Cliente
         </button>
     </div>
 </div>
@@ -28,7 +26,7 @@ require_once '../util/connection.php';
         </tr>
     </thead>
     <tbody>
-        <?php foreach($funcionarios as $row) {?>
+        <?php foreach($clientes as $row) {?>
         <tr>
             <td><?php echo $row['ID']; ?></td>
             <td><?php echo $row['NOME']; ?></td> 
@@ -37,7 +35,7 @@ require_once '../util/connection.php';
             <td><?php echo $row['TIPO']; ?></td>
             <td><?php echo $row['STATUS']; ?></td>
             <td>
-                <button type="button" onclick="btnfunc(this)" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i> Editar</button>
+                <button type="button" onclick="btncliente(this)" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i> Editar</button>
                 <?php if($row['STATUS'] == 1) {?>
                 <button type="button" class="btn btn-secondary btn-sm"><i class="fa fa-user-times"></i> Desativar</button>
                 <?php } ?>

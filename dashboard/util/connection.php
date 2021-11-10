@@ -9,12 +9,15 @@ if(!isset($_SESSION['usuario'])) {
 $usuario =  $_SESSION['usuario'];
 $tipo = $usuario -> get_tipo();
 
+$todosAgendamentos = obterTodosAgendamentos();
 $agendamentosPendentes = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_AGENDAMENTO_PENDENTE);
 $agendamentosCancelados = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_AGENDAMENTO_CANCELADO);
 $agendamentosConcluidos = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_AGENDAMENTO_CONCLUIDO);
 
+$clientes = obterClientes();
 $servicos = obterServicos();
 $funcionarios = obterFuncionarios();
+$charts = charts();
 
 if($tipo == 0){
     $color = '#002050';

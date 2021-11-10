@@ -21,7 +21,7 @@ if($tipo == 0) {
         </a>
     </li>
     <li class="nav-item">
-        <a  onclick="btnclick('./pages/.php')" class="nav-link" id="nav-link" tabindex="1">
+        <a  onclick="btnclick('./pages/clientes.php')" class="nav-link" id="nav-link" tabindex="1">
         <span class="fa fa-users"></span>
         Clientes
         </a>
@@ -30,6 +30,12 @@ if($tipo == 0) {
         <a  onclick="btnclick('./pages/servicos.php')" class="nav-link" id="nav-link" tabindex="1">
         <span class="fa fa-clipboard"></span>
         Serviços
+        </a>
+    </li>
+    <li class="nav-item">
+        <a  onclick="btnclick('./pages/agendamentos.php')" class="nav-link" id="nav-link" tabindex="1">
+        <span class="fa fa-calendar"></span>
+        Agendamentos
         </a>
     </li>
 <?php } ?>

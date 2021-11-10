@@ -2,19 +2,18 @@
 <?php
 require_once '../usuario/usuario.php';
 require_once '../banco/banco.php';
+require_once '../clientes/cliente.php';
 
+session_start();
 $MensagemErro = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
-    $senha = $_POST['senha'];
-    $usuario = new Usuario($email, $senha);
-
-    if($usuario -> Logar($email, $senha)) {
-        header('Location: ../dashboard/dashboard.php');
-    }
-    else {
-        $MensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
+    if (validarExistencia($email) > 0) {
+        $_SESSION['email'] = $email;
+        header('Location: resetValidator.php');
+    } else {
+        header('Location: reset.php');
     }
 }
 ?>
@@ -91,34 +90,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="d-flex justify-content-center h-100">
                     <div class="card" id="login-card">
                         <div class="card-header">
-                            <h3>Faça seu Login</h3>
+                            <h3>Coloque Seu Email</h3>
                         </div>
                         <div class="card-body">
-                            <form action="login.php" method="POST">
+                            <form action="reset.php" method="POST">
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="email"  <?php if (!empty($_POST['email'])){echo "value=\"".$_POST["nome"]."\"";}?> name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
-                                <div class="input-group form-group py-1">
-                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                                    <input type="password" name="senha" class="form-control" placeholder="Senha" required>
-                                </div>
-                                <div class="row align-items-center remember py-2">
-                                    <input type="checkbox">Lembrar-me
-                                </div>
-                                <div class="form-group py-2">
-                                    <input type="submit" value="Login" class="btn float-right login_btn" >
+                                <div class="form-group py-1">
+                                    <input type="submit" value="Resetar" class="btn float-right login_btn" >
                                 </div>
                                 <?php
                                 echo $MensagemErro;
                                 ?>
                             </form>
                         </div>
-                        <div class="card-footer">
-                            <div class="d-flex justify-content-center links">
-                                <span><a href="../clientes/cadastro.php">Criar Cadastro</a> ou <a href="../reset/reset.php">Resetar Senha</a></span>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

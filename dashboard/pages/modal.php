@@ -63,7 +63,7 @@ require_once '../util/connection.php';
             <form action="dashboard.php" method="POST" id="cadFunc">
                 <div class="row g-3 justify-content-center">
                     <div class="col-sm-12">
-                        <input type="nome" class="form-control" name="nomeFuncionario" id="nomeFuncionario" placeholder="Nome" required>
+                        <input type="nome" class="form-control" name="nome" id="nomeFuncionario" placeholder="Nome" required>
                     </div>
                     <div class="col-sm-12">
                         <input type="email" class="form-control"  name="email" placeholder="Email" required>
@@ -120,12 +120,12 @@ require_once '../util/connection.php';
 <div class="modal fade" id="popupCliente" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" >
                 <h5 class="modal-title">Cadastrar Cliente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">  
-            <form action="./cadastrarCliente.php" method="POST" id="cadClient"> 
+            <form action="dashboard.php" method="POST" id="cadClient"> 
                 <div class="row g-3 justify-content-center">
                     <div class="col-sm-12">
                         <input type="nome" class="form-control" name="nome" placeholder="Nome" required>
@@ -178,7 +178,40 @@ require_once '../util/connection.php';
         </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <input type="submit" name="cadfuncionario" form="cadFunc" class="btn btn-primary" value="Enviar">
+                <input type="submit" name="editfuncionario" form="editFunc" class="btn btn-primary" value="Enviar">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editarCliente" tabindex="-1">
+    <div class="modal-dialog modal-md  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">  
+            <form action="dashboard.php" method="POST" id="editCliente">
+                <div class="row g-3 justify-content-center">
+                    <div class="col-sm-12">
+                        <input type="nome" class="form-control" name="nome" id="editNameCliente" placeholder="Nome" required>
+                    </div>
+                    <div class="col-sm-12">
+                        <input type="email" class="form-control"  name="email" id="editEmailCliente" placeholder="Email" required disabled>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" name="senha" placeholder="Senha" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="password" class="form-control" name="confirmar_senha" placeholder="Confirmar Senha" required>
+                    </div>
+                </div>
+            </form> 
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <input type="submit" name="editCliente" form="editCliente" class="btn btn-primary" value="Enviar">
             </div>
         </div>
     </div>

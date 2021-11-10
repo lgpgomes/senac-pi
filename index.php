@@ -20,7 +20,7 @@ $pdo = obterServicos();
     <!--Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--CSS-->
-    <link rel="stylesheet" href="./assets/css/custom-style.css"> 
+    <link rel="stylesheet" href="./assets/css/custom-styles.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
@@ -40,7 +40,7 @@ $pdo = obterServicos();
     <header class="header" id="home">
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container">
-          <a href="index.html"><img src="./assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
+          <a href="index.php#home"><img src="./assets/img/logo.png" alt="logo mr barbers" class="nav-logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -118,9 +118,11 @@ $pdo = obterServicos();
           <div class="row gx-5 justify-content-center">
               <div class="col-lg-7">
                 <h3 class="title-about">Barba, Cabelo e Agendamento!</h3>
-                <p class="text-about">O MR. Barber é um site de agendamento on-line para barbearias que permite gerenciar horários
-                   de reservas com rapidez e flexibilidade, organizando a agenda e horários do estabelecimento. O usuário, por sua vez, poderá 
-                   marcar seus horários, além de poder verificar serviços…</p>
+                <p class="text-about">
+                  O MR. Barber é um site de agendamento on-line para barbearias que permite gerenciar horários
+                  com rapidez e flexibilidade, organizando a agenda e horários do estabelecimento. O usuário, por sua vez, poderá 
+                  marcar seus horários, além de poder verificar serviços…
+                </p>
                 <ul class="item-about" style="list-style: none; padding: 0;"> 
                   <li><i class="item-about fa fa-check-circle"></i> AGENDE SEUS HORÁRIOS.</li>
                   <li><i class="item-about fa fa-check-circle"></i> TOTALMENTE ONLINE.</li>
@@ -177,7 +179,7 @@ $pdo = obterServicos();
                 <span class="focus-input" data-placeholder="MESSAGEM"></span>
               </div>
               <div class="container-contact-form-btn d-flex justify-content-center">
-                <button class="btn"><i class="fa fa-check"></i> Enviar Mensagem </button>
+                <button class="btn"><i class="fa fa-check"></i> ENVIAR MENSAGEM </button>
               </div>
             </form>
           </div>

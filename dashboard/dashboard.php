@@ -19,6 +19,7 @@ require_once './util/cadastrar.php';
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Dashboard</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="../assets/css/dashboard.css" rel="stylesheet">
     </head>
@@ -121,7 +122,6 @@ require_once './util/cadastrar.php';
 $('#conteudo').load('./pages/home.php');
 $('#navside, #navoff').load('./pages/nav.php');
 $('#modal').load('./pages/modal.php');
-
     function btnclick(_url){
         $.ajax({
             url : _url,
@@ -132,21 +132,32 @@ $('#modal').load('./pages/modal.php');
             },
             complete: function(){
                 setTimeout(function() {
-                    $( '#spinner' ).html('');
+                    $( '#spinner ').html('');
                     $('#conteudo').show();
-                }, 500);
+                }, 350);
             },
             success: function(data) {
                 $('#conteudo').load(_url);
             },
             error: function() {
-                $('#conteudo').text('An error occurred');
+                $('#conteudo').text('Ocorreu um erro :(');
             }
         });
     }
 </script>
 
+
 <script type="text/javascript">
+    function btncliente(obj){
+        $('#editarCliente').modal('show');
+        $tr = $(obj).closest('tr');
+        var data = $tr.children("td").map(function() {
+            return $(this).text();
+        }).get();
+        $('#editNameCliente').val(data[1]);
+        $('#editEmailCliente').val(data[2]);
+    }
+
     function btnfunc(obj){
         $('#editarFuncionario').modal('show');
         $tr = $(obj).closest('tr');
@@ -156,9 +167,7 @@ $('#modal').load('./pages/modal.php');
         $('#editNameFuncionario').val(data[1]);
         $('#editEmailFuncionario').val(data[2]);
     }
-</script>
 
-<script type="text/javascript">
     function btnserv(obj){
         $('#editarServico').modal('show');
         $tr = $(obj).closest('tr');
@@ -169,13 +178,5 @@ $('#modal').load('./pages/modal.php');
         $('#editDescricaoServico').val(data[1]);
         $('#editImagemServico').val(data[2]);
         $('#editIconeServico').val(data[2]);
-
     }
 </script>
-
-
-
-
-
-
-

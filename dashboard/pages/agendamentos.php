@@ -12,6 +12,34 @@ if($tipo == 1) {
 }
 ?>
 
+<?php
+if($tipo == 0) {
+?>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Serviço</th>
+            <th>Cliente</th>
+            <th>Funcionário</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($todosAgendamentos as $row) {?>
+        <tr>
+            <td><?php echo $row['DATA_HORA']; ?></td>
+            <td><?php echo $row['DESCRICAO']; ?></td> 
+            <td><?php echo $row['NOME_CLIENTE']; ?></td>
+            <td><?php echo $row['NOME_FUNCIONARIO']; ?></td> 
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php } ?>
+
+<?php
+if($tipo == 1 || $tipo == 2) {
+?>
 <?php if($agendamentosPendentes -> rowCount() > 0) {?>
     <p class="h5">Agendamentos Pendentes</p>
     <table class="table table-striped table-hover">
@@ -91,4 +119,5 @@ if($tipo == 1) {
             </div>
         </div>
     </div>
+<?php } ?>
 <?php } ?>

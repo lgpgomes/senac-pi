@@ -20,6 +20,7 @@ function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
     Banco::desconectar();
 }
 
+
 function cadastrarServico($descricao, $imagem_nome, $icone_nome)
 {
     $pdo = Banco::conectar();
