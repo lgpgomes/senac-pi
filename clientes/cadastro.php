@@ -2,19 +2,23 @@
 require_once './cliente.php';
 require_once '../banco/banco.php';
 
-$Mensagem = "";
+$mensagem = "";
+$divSuccess = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i>';
+$divError = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i>';
+$div = '</div>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
     $confirmar_senha = $_POST['confirmar_senha'];
     $email = $_POST['email'];
-
-    $Mensagem = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, TIPO_USUARIO_CLIENTE);
-
-    if(empty($Mensagem)) {
-        $Mensagem = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i><span>Sucesso! Redirecionando...</span> </div>';
-        header('Refresh: 3; ../login/login.php');
+    $mensagem = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, 2);
+    
+    if (empty($mensagem)) {
+        $mensagem = $divSuccess.'Sucesso! Redirecionando...'.$div;
+        header('Refresh: 2; ../login/login.php');
+    } else {
+        $mensagem = $divError.$mensagem.$div;
     }
 }
 ?>
@@ -90,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="d-flex justify-content-center h-100">
                     <div class="card" id="cadastro-card">
                         <div class="card-header">
-                            <h3>Faça seu Cadastro</h3>
+                            <h3>Faça Seu Cadastro</h3>
                         </div>
                         <div class="card-body">
                             <form action="cadastro.php" method="POST">
@@ -115,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                                 <!--PHP-->
                                 <?php
-                                echo $Mensagem;
+                                echo $mensagem;
                                 ?>
                             </form>
                         </div>

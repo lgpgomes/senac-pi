@@ -2,8 +2,10 @@
 require_once '../../banco/banco.php';
 require_once '../../usuario/usuario.php';
 require_once '../util/connection.php';
-?>
 
+$servicos = obterServicos(null);
+?>
+<?php if($tipo == 0) {?>
 <div class="row">
     <div class="col-auto">
         <p class="h5">Serviços</p>
@@ -35,13 +37,14 @@ require_once '../util/connection.php';
             <td>
                 <button type="button" onclick="btnserv(this)" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i> Editar</button>
                 <?php if($row['STATUS'] == 1) {?>
-                <button type="button" class="btn btn-secondary btn-sm"><i class="fa fa-user-times"></i> Desativar</button>
+                    <button onclick="statusServ(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>)" type="button"  class="btn btn-secondary btn-sm"><i class="fa fa-user-times"></i> Desativar</button>
                 <?php } ?>
                 <?php if($row['STATUS'] == 0) {?>
-                <button type="button" class="btn btn-secondary btn-sm"><i class="fa fa-user-plus"></i> Ativar</button>
+                    <button onclick="statusServ(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>)" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-user-plus"></i> Ativar</button>
                 <?php } ?>
             </td>
         </tr>
         <?php } ?>
     </tbody>
 </table>
+<?php } ?>

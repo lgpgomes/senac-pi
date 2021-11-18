@@ -5,7 +5,7 @@ require_once '../banco/banco.php';
 require_once '../clientes/cliente.php';
 
 session_start();
-$MensagemErro = "";
+$mensagem = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['email'] = $email;
         header('Location: resetValidator.php');
     } else {
-        header('Location: reset.php');
+        $mensagem = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Email Não Encontrado!</span> </div>';
     }
 }
 ?>
@@ -98,15 +98,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     <input type="email" name="email" class="form-control" placeholder="Email" required>
                                 </div>
-                                <div class="form-group py-1">
+                                <div class="form-group py-2">
                                     <input type="submit" value="Resetar" class="btn float-right login_btn" >
                                 </div>
                                 <?php
-                                echo $MensagemErro;
+                                echo $mensagem;
                                 ?>
                             </form>
                         </div>
-
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                <span><a href="../clientes/cadastro.php">Criar Cadastro</a> ou <a href="../login/login.php">Fazer Login</a></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

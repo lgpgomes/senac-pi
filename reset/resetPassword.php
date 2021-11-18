@@ -1,15 +1,33 @@
 
 <?php
-require_once '../usuario/usuario.php';
+require_once '../clientes/cliente.php';
 require_once '../banco/banco.php';
-session_start();
 
+$mensagem = "";
+$divSuccess = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i>';
+$divError = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i>';
+$div = '</div>';
+
+session_start();
 if(empty($_SESSION['token'])) {
     header('Location: reset.php');
+    session_destroy();
 } 
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_SESSION['email'];
     $nova_senha = $_POST['nova_senha'];
-    resetPassword("vagner@gmail.com", $nova_senha);
+    $confirmar_nova_senha = $_POST['confirmar_nova_senha'];
+
+    $mensagem = resetPassword($email, $nova_senha, $confirmar_nova_senha);
+
+    if(empty($mensagem)) {
+        $mensagem = $divSuccess.'Sucesso! Redirecionando...'.$div;
+        header('Refresh: 2; ../login/login.php');
+        session_destroy();
+    } else {
+        $mensagem = $divError.$mensagem.$div;
+    }
 }
 ?>
 
@@ -94,15 +112,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="password" name="nova_senha" class="form-control" placeholder="Senha" required>
                                 </div>
                                 <div class="input-group form-group py-1">
-                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                    <span class="input-group-text"><i class="fa fa-shield"></i></span>
                                     <input type="password" name="confirmar_nova_senha" class="form-control" placeholder="Confirmar Senha" required>
                                 </div>
                                 <div class="form-group py-2">
                                     <input type="submit" value="Confirmar" class="btn float-right login_btn" >
                                 </div>
                                 <?php
+                                echo $mensagem;
                                 ?>
                             </form>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                <span><a href="../clientes/cadastro.php">Criar Cadastro</a> ou <a href="../login/login.php">Fazer Login</a></span>
+                            </div>
                         </div>
                     </div>
                 </div>

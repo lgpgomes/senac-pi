@@ -2,7 +2,7 @@
 require_once 'usuario/usuario.php';
 require_once 'banco/banco.php';
 
-$pdo = obterServicos();
+$servicos = obterServicos(1);
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,6 @@ $pdo = obterServicos();
         </div>
       </div>
     </div>
-
     <!--Header-->
     <header class="header" id="home">
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
@@ -88,14 +87,14 @@ $pdo = obterServicos();
         </div>
       </div>
     </section>
-
+    
     <!--Services-->
     <section class="services-section" id="servicos">
       <div class="container d-flex flex-wrap gap-5 justify-content-center">
         <div class="container d-flex justify-content-center">
             <h2 class="display-6 title-services"><span style="opacity: 0.3;">NOSSOS</span>SERVIÇOS</h2>
         </div>
-        <?php foreach($pdo as $row){ ?>
+        <?php foreach($servicos as $row){ ?>
         <div class="card">
             <div class="card-img d-flex align-items-center justify-content-center" style="background-image: url(./assets/uploads/img/<?php echo $row['IMAGEM'];?>);">
                 <div class="service">
@@ -106,7 +105,6 @@ $pdo = obterServicos();
         </div>
         <?php } ?>
       </div>
-
     </section>
 
     <!--Sobre-->
@@ -238,6 +236,5 @@ $pdo = obterServicos();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!--Javascript-->
     <script src="./assets/js/main.js"></script>
-
   </body>
 </html>

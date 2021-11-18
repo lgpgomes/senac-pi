@@ -3,30 +3,37 @@
 require_once '../usuario/usuario.php';
 require_once '../banco/banco.php';
 
-
 session_start();
+
+$mensagemErro = '';
 
 if(empty($_SESSION['email'])) {
     header('Location: reset.php');
 } 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['date'] = $_POST['date'];
-    foreach(validarUsuario($_SESSION['email'], $_SESSION['date']) as $row) {
-        $date = $row['DATA_HORA'];
-        echo $date;
+    $data_digitada = $_POST['date'];
+    $data_db = "";
+    foreach(validarUsuario($_SESSION['email']) as $row) {
+        $data_db = $row['DATA_HORA'];
+        $tipo = $row['TIPO'];
     }
-
-    $newdate = date('Y-m-d', strtotime('-7 days', strtotime($date)));
-    for($i = 0;$i < 15;$i++) {
-        $newdate = date('Y-m-d', strtotime('+1 days', strtotime($newdate)));
-        if($newdate == $date){
-            $_SESSION['token'] = $_POST['date'];
+    if ($tipo == 1) {
+        $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Você É Um Funcionário, Contate O ADM!</span> </div>';
+    } else if ($tipo == 0) {
+        $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Você É Um ADM, Contate O Suporte!</span> </div>';
+    } else {
+        $newdate = date('Y-m-d', strtotime('-8 days', strtotime($data_db)));
+        for($i = 0;$i < 15;$i++) {
+            $newdate = date('Y-m-d', strtotime('+1 days', strtotime($newdate)));
+            if($newdate == $data_digitada){
+                $_SESSION['token'] = rand(1000,9999);
+                header('Location: resetPassword.php');
+            }
         }
+        $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Data Incorreta!</span> </div>';
     }
-    header('Location: resetPassword.php');
-
-}
+} 
 
 ?>
 
@@ -102,19 +109,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="d-flex justify-content-center h-100">
                     <div class="card" id="login-card">
                         <div class="card-header">
-                            <h4>Qual a data do seu último agendamento?</h4>
+                            <h4>Qual A Data Do Seu Último Agendamento?</h4>
                         </div>
                         <div class="card-body">
                             <form action="resetValidator.php" method="POST">
                                 <div class="input-group form-group py-1">
-                                    <input type="date" name="date" min="<?php echo date('Y-m-d');?>" max="2021-12-25" class="form-control" id="data" required>
+                                    <input type="date" name="date" class="form-control" id="data" required>
                                 </div>
-                                <div class="form-group py-1">
+                                <div class="form-group py-2">
                                     <input type="submit" value="Confirmar" class="btn float-right login_btn" >
                                 </div>
                                 <?php
+                                echo $mensagemErro;
                                 ?>
                             </form>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                <span><a href="../clientes/cadastro.php">Criar Cadastro</a> ou <a href="../login/login.php">Fazer Login</a></span>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@
 require_once '../usuario/usuario.php';
 require_once '../banco/banco.php';
 
-$MensagemErro = "";
+$mensagem = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: ../dashboard/dashboard.php');
     }
     else {
-        $MensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span>Email ou Senha Inválidos!</span> </div>';
+        $mensagem = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Email ou Senha Inválidos!</span> </div>';
     }
 }
 ?>
@@ -91,13 +91,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="d-flex justify-content-center h-100">
                     <div class="card" id="login-card">
                         <div class="card-header">
-                            <h3>Faça seu Login</h3>
+                            <h3>Faça Seu Login</h3>
                         </div>
                         <div class="card-body">
                             <form action="login.php" method="POST">
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="email"  <?php if (!empty($_POST['email'])){echo "value=\"".$_POST["nome"]."\"";}?> name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email"  <?php if (!empty($_POST['email'])){echo "value=\"".$_POST["email"]."\"";}?> name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
@@ -109,9 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="form-group py-2">
                                     <input type="submit" value="Login" class="btn float-right login_btn" >
                                 </div>
-                                <?php
-                                echo $MensagemErro;
-                                ?>
+                                <?php echo $mensagem;?>
                             </form>
                         </div>
                         <div class="card-footer">
@@ -131,9 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!--Javascript-->
     <script src="../assets/js/main.js"></script>
     <script>
-    //Remove a classe msgErro apos 5s
+    //Remove a classe msgErro apos 4s
         setTimeout(function() {
             $("#msg").fadeOut().empty();
-        }, 5000);
+        }, 4000);
     </script>
 </html>
