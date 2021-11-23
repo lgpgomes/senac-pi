@@ -5,7 +5,7 @@ require_once '../banco/banco.php';
 session_start();
 
 $mensagem = "";
-
+//Recebe POST com os dados do login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['resetEmail'] = $email;
     }
 }
-
 if(!empty($_POST['email'])) {
     $inputEmail = $_POST['email'];
 } 
@@ -91,7 +90,6 @@ else if (!empty($_SESSION['loginEmail'])) {
                     </div>
                 </div>
             </nav>
-        </header>
         </header>
         <section class="login-section" id="login-section">
             <div class="container" id="login">

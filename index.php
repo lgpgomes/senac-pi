@@ -117,7 +117,7 @@ $servicos = obterServicos(1);
               <div class="col-lg-7">
                 <h3 class="title-about">Barba, Cabelo e Agendamento!</h3>
                 <p class="text-about">
-                  O MR. Barber é um site de agendamento on-line para barbearias que permite gerenciar horários
+                  O MR. Barber é um sistema de agendamentos on-line para barbearias que permite gerenciar horários
                   com rapidez e flexibilidade, organizando a agenda e horários do estabelecimento. O usuário, por sua vez, poderá 
                   marcar seus horários, além de poder verificar serviços…
                 </p>

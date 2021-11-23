@@ -12,7 +12,6 @@ class Banco
     {
         die('A função Init nao é permitido!');
     }
-    
     public static function conectar()
     {
         if(null == self::$cont)
@@ -28,11 +27,9 @@ class Banco
         }
         return self::$cont;
     }
-    
     public static function desconectar()
     {
         self::$cont = null;
     }
 }
-
 ?>

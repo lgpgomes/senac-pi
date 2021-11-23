@@ -157,14 +157,12 @@ function obterTodosAgendamentos() {
     return $pdo -> query($consulta);
 }
 //Funcao que retorna ultimo agendamento
-function validarUsuario($email) {
+function ultimoAgendamento($id) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT usuario.TIPO as TIPO, DATE_FORMAT(agendamento.DATA_HORA, '%Y-%m-%d') as DATA_HORA
-    FROM agendamento, usuario
-    WHERE usuario.EMAIL = '$email'
-    ORDER BY agendamento.DATA_HORA DESC LIMIT 1;";
+    $consulta = "SELECT DATE_FORMAT(agendamento.DATA_HORA, '%Y-%m-%d') as DATA_HORA FROM agendamento WHERE ID_CLIENTE = '$id' LIMIT 1";
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
+
 ?>

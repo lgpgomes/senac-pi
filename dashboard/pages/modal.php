@@ -20,7 +20,7 @@ $servicos = obterServicos(STATUS_SERVICO_ATIVO);
                     <div class="row g-3 align-items-center">
                         <div class="col-sm-6">
                             <select name="profissional" id="profissional" class="form-select" required >
-                                <option selected disabled>Profissional</option>
+                                <option value="" selected disabled>Profissional</option>
                                 <?php foreach($funcionariosAtivos as $row) {?>
                                         <option value="<?php echo $row['ID'];?>"><?php echo $row['NOME']; ?></option>
                                 <?php } ?>
@@ -28,7 +28,7 @@ $servicos = obterServicos(STATUS_SERVICO_ATIVO);
                         </div>
                         <div class="col-sm-6">
                             <select name="servico" id="servico" class="form-select" required>
-                                <option selected disabled>Serviço</option>
+                                <option value="" selected disabled>Serviço</option>
                                     <?php foreach($servicos as $row) {?>
                                         <option value="<?php echo $row['ID'];?>"><?php echo $row['DESCRICAO']; ?></option>
                                     <?php } ?>
@@ -39,6 +39,7 @@ $servicos = obterServicos(STATUS_SERVICO_ATIVO);
                         </div>
                         <div class="col-sm-6" >
                             <select name="time" id="hora" class="form-select" >
+                                <option value="" selected disabled>Horário</option>
                                 <option value="08:00:00">8:00</option>
                                 <option value="08:30:00">8:30</option>
                                 <option value="09:00:00">9:00</option>

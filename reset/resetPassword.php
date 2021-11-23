@@ -16,11 +16,11 @@ if(empty($_SESSION['token'])) {
 } 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_SESSION['email'];
+    $id = $_SESSION['resetValidationID'];
     $nova_senha = $_POST['nova_senha'];
     $confirmar_nova_senha = $_POST['confirmar_nova_senha'];
 
-    $mensagem = resetPassword($email, $nova_senha, $confirmar_nova_senha);
+    $mensagem = resetPassword($id, $nova_senha, $confirmar_nova_senha);
 
     if($mensagem == "Sucesso!") {
         $mensagem = $divSuccess.'Sucesso! Redirecionando...'.$div;

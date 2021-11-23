@@ -49,14 +49,11 @@ function editarServico($descricao, $imagem_nome, $icone_nome, $id)
 //Função Verificar Existencia Email
 function validarExistencia($email)
 {
-    $quantidadeUsuariosExistentes = "SELECT COUNT(EMAIL) as quantidadeUsuarios FROM usuario WHERE EMAIL = ?";
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $q = $pdo->prepare($quantidadeUsuariosExistentes);
-    $q->execute(array($email));
-    $dados = $q -> fetch(PDO::FETCH_ASSOC);
+    $consulta = "SELECT usuario.ID as ID, usuario.TIPO as TIPO FROM usuario WHERE EMAIL = '$email'";
     Banco::desconectar();
-    return $dados['quantidadeUsuarios'];
+    return $pdo -> query($consulta);
 }
 //Função Para Marcar Agendamentos
 function agendar($idServico, $date, $time, $status, $idFuncionario, $idCliente)
@@ -78,7 +75,7 @@ function agendar($idServico, $date, $time, $status, $idFuncionario, $idCliente)
     return 'Sucesso!';
 }
 //Função Recuperar Senha
-function resetPassword($email, $senha, $confirmar_senha) 
+function resetPassword($id, $senha, $confirmar_senha) 
 {
     $erro = validarCampo('null', 'null', $senha, $confirmar_senha);
     if (!empty($erro)) {
@@ -86,7 +83,7 @@ function resetPassword($email, $senha, $confirmar_senha)
     }
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $update = "UPDATE `usuario` SET `SENHA`='$senha' WHERE usuario.EMAIL = '$email'";
+    $update = "UPDATE `usuario` SET `SENHA`='$senha' WHERE usuario.ID = '$id'";
     $q = $pdo->prepare($update);
     $q->execute(array($senha));
     Banco::desconectar();
@@ -120,7 +117,7 @@ function validarCampo($email, $nome, $senha, $confirmar_senha) {
     else if(empty($email)) {
         return 'Email Em Branco!';
     }
-    else if (validarExistencia($email) > 0 && $email != 'null') {
+    else if (validarExistencia($email) -> rowCount() > 0 && $email != 'null') {
         return 'Usuário Já Existe!';
     }
     else if (filter_var($email, FILTER_VALIDATE_EMAIL) != true && $email != 'null') {

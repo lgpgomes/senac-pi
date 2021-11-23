@@ -8,7 +8,7 @@ $mensagem = "";
 $divSuccess = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i>';
 $divError = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i>';
 $div = '</div>';
-
+//Recebe o POST com os dados do Cadastro
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];

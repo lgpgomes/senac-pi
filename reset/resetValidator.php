@@ -1,44 +1,33 @@
-
 <?php
 require_once '../usuario/usuario.php';
 require_once '../banco/banco.php';
 
 session_start();
 
-$mensagemErro = '';
+$mensagem = '';
 
-if(empty($_SESSION['resetValidationEmail'])) {
+if(empty($_SESSION['resetValidationID'])) {
     header('Location: reset.php');
 } 
-
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_digitada = $_POST['date'];
-    $data_db = "";
     //Retorna com a data do último agendamento
-    foreach(validarUsuario($_SESSION['resetValidationEmail']) as $row) {
-        $data_db = $row['DATA_HORA'];
-        $tipo = $row['TIPO'];
-    }
-    //Se for funcionário, retorna erro
-    if ($tipo == 1) {
-        $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Você É Um Funcionário, Contate O ADM!</span> </div>';
-    //Se for administrador, retorna erro
-    } else if ($tipo == 0) {
-        $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Você É Um ADM, Contate O Suporte!</span> </div>';
-    //Se for cliente, ele verifica a data do DB com a Data Digitada
-    } else {
+    $data_db = ultimoAgendamento($_SESSION['resetValidationID']) -> fetch()[0];
+
+    if ($data_db) {
         $newdate = date('Y-m-d', strtotime('-8 days', strtotime($data_db)));
         for($i = 0;$i < 15;$i++) {
             $newdate = date('Y-m-d', strtotime('+1 days', strtotime($newdate)));
-            if($newdate == $data_digitada){
+            if($newdate == $data_digitada) {
                 $_SESSION['token'] = rand(1000,9999);
                 header('Location: resetPassword.php');
             }
         }
-        $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Data Incorreta!</span> </div>';
-    }
+        $mensagem = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i><span>Data Incorreta!</span></div>';
+    } else {
+        $mensagem = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i><span>Contate o Administrador!</span> </div>';
+    } 
 } 
-
 ?>
 
 <!DOCTYPE html>
@@ -124,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="submit" value="Confirmar" class="btn float-right login_btn" >
                                 </div>
                                 <?php
-                                echo $mensagemErro;
+                                echo $mensagem;
                                 ?>
                             </form>
                         </div>
