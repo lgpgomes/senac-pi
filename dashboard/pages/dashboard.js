@@ -1,8 +1,14 @@
+
 $('#modal').load('./pages/modal.php');
 $('#spinner').hide();
 $('#conteudo').load('./pages/home.php');
 $('#navside, #navoff').load('./pages/nav.php');
+$('.d-none').fadeIn(1000);
 
+$(document).ready(function(){
+    $('input.timepicker').timepicker({});
+});
+  
 
 $(document).ajaxStart(function(){
     $('#spinner').show();
@@ -10,18 +16,8 @@ $(document).ajaxStart(function(){
     $('#spinner').hide();
  });
 
- function hiddenAlert () {
-     $('.alert').addClass('d-none');
- }
-
 function btnclick(_url){
-    $.ajax({
-        url : _url,
-        type : 'post',
-        success: function(){
-           $('#conteudo').load(_url);
-        }
-    });
+    $('#conteudo').load(_url);
 }
 
 function btncliente(obj){
@@ -33,6 +29,8 @@ function btncliente(obj){
     $('#editIdCliente').val(data[0]);
     $('#editNomeCliente').val(data[1]);
     $('#editEmailCliente').val(data[2]);
+    $('#editSenhaCliente').val(data[3]);
+    $('#editCSenhaCliente').val(data[3]);
 }
 
 function btnfunc(obj){
@@ -44,6 +42,8 @@ function btnfunc(obj){
     $('#editIdFuncionario').val(data[0]);
     $('#editNomeFuncionario').val(data[1]);
     $('#editEmailFuncionario').val(data[2]);
+    $('#editSenhaFuncionario').val(data[3]);
+    $('#editCSenhaFuncionario').val(data[3]);
 }
 
 function btnserv(obj){
@@ -59,10 +59,10 @@ function btnserv(obj){
 function statusAgend(id, status) {
 $.ajax({
     type: "POST",
-    url: "./dashboard.php",
+    url: "./util/teste.php",
     data: { idAgend: id, statusAgend: status},
     success: function() {
-        btnclick('./pages/agendamentos.php');
+       btnclick('./pages/agendamentos.php');
     }
 });
 }
@@ -88,12 +88,14 @@ function statusUser(id, status, page) {
     }
 });
 }
-
+//Recebe Post Editar Funcionario
 $(document).on("submit", "#editFunc", function (e){
+    console.log( $( this ).serialize() );
+
     e.preventDefault();
     var nome = $('#editNomeFuncionario').val();
     var senha = $('#editSenhaFuncionario').val();
-    var c_senha = $('#editSenhaFuncionario').val();
+    var c_senha = $('#editCSenhaFuncionario').val();
     var id = $('#editIdFuncionario').val();
     $.ajax({
         url: './util/teste.php',
@@ -102,13 +104,13 @@ $(document).on("submit", "#editFunc", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/funcionarios.php'); 
         },
     })
-    btnclick('./pages/funcionarios.php');
     $('#editarFuncionario').modal('hide');
     $("#editFunc").trigger("reset");
 });
-
+//Recebe Post Editar Cliente
 $(document).on("submit", "#editCliente", function (e){
     e.preventDefault();
     var nome = $('#editNomeCliente').val();
@@ -122,13 +124,13 @@ $(document).on("submit", "#editCliente", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/clientes.php');
         },
     })
-    btnclick('./pages/clientes.php');
     $('#editarCliente').modal('hide');
     $("#editCliente").trigger("reset");
 });
-
+//Recebe Post Editar Serviço
 $(document).on("submit", "#editServ", function (e){
     e.preventDefault();
     var id = $('#editIdServico').val();
@@ -149,13 +151,13 @@ $(document).on("submit", "#editServ", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/servicos.php');
         }
      });
-     btnclick('./pages/servicos.php');
      $('#editarServico').modal('hide');
      $("#editServ").trigger("reset");
 });
-
+//Recebe Post Cadastrar Serviço
 $(document).on("submit", "#cadServ", function (e){
     e.preventDefault();
     var cadDescricao = $('#cadDescricaoServico').val();
@@ -174,12 +176,12 @@ $(document).on("submit", "#cadServ", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/servicos.php');
         },
      });
-     btnclick('./pages/servicos.php');
      $('#popupServico').modal('hide');
 });
-
+//Recebe Post Cadastrar Funcionário
 $(document).on("submit", "#cadFunc", function (e){
     e.preventDefault();
     var nome = $('#cadNomeFuncionario').val();
@@ -193,12 +195,12 @@ $(document).on("submit", "#cadFunc", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/funcionarios.php'); 
         }
     })
-    btnclick('./pages/funcionarios.php'); 
     $('#popupFuncionario').modal('hide');
 });
-
+//Recebe Post Cadastrar Cliente
 $(document).on("submit", "#cadClient", function (e){
     e.preventDefault();
     var nome = $('#cadNomeCliente').val();
@@ -213,12 +215,12 @@ $(document).on("submit", "#cadClient", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/clientes.php');        
         },
     })
-    btnclick('./pages/clientes.php');        
     $('#popupCliente').modal('hide');
 });
-
+//Recebe Post Agendamento
 $(document).on("submit", "#agendar", function (e){
     e.preventDefault();
     var idFuncionario = $('#profissional').val();
@@ -232,23 +234,26 @@ $(document).on("submit", "#agendar", function (e){
         dataType: 'json',
         success: function(data) {
             alertData(data);
+            btnclick('./pages/home.php');        
         },
     })
-    btnclick('./pages/home.php');        
     $('#popupAgendamento').modal('hide');
 
 });
 
 function alertData(data) {
+    $("#msg").html(data.msg);
     if (data.event == 1) {
-        $( ".alert" ).removeClass("d-none alert-danger").addClass( "alert-success" );
-        $("#msg").html(data.msg);
-        
+        $(".alert").removeClass("d-none alert-danger").addClass("alert-success");
+        $("#iconeAlert").removeClass("fa-times-circle").addClass("fa-check-circle");
     } else {
-        $( ".alert" ).removeClass("d-none alert-success").addClass( "alert-danger" );
-        $("#msg").html(data.msg);
+        $(".alert").removeClass("d-none alert-success").addClass("alert-danger");
+        $("#iconeAlert").removeClass("fa-check-circle").addClass("fa-times-circle");
     }
-    setTimeout(function() {
-        $(".alert").addClass('d-none');
-    }, 6000);
+    //$(".alert").addClass('d-none');
 }
+
+function hiddenAlert () {
+    $('.alert').addClass('d-none');
+}
+

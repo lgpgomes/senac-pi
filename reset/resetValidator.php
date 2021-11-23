@@ -7,21 +7,25 @@ session_start();
 
 $mensagemErro = '';
 
-if(empty($_SESSION['email'])) {
+if(empty($_SESSION['resetValidationEmail'])) {
     header('Location: reset.php');
 } 
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_digitada = $_POST['date'];
     $data_db = "";
-    foreach(validarUsuario($_SESSION['email']) as $row) {
+    //Retorna com a data do último agendamento
+    foreach(validarUsuario($_SESSION['resetValidationEmail']) as $row) {
         $data_db = $row['DATA_HORA'];
         $tipo = $row['TIPO'];
     }
+    //Se for funcionário, retorna erro
     if ($tipo == 1) {
         $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Você É Um Funcionário, Contate O ADM!</span> </div>';
+    //Se for administrador, retorna erro
     } else if ($tipo == 0) {
         $mensagemErro = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Você É Um ADM, Contate O Suporte!</span> </div>';
+    //Se for cliente, ele verifica a data do DB com a Data Digitada
     } else {
         $newdate = date('Y-m-d', strtotime('-8 days', strtotime($data_db)));
         for($i = 0;$i < 15;$i++) {

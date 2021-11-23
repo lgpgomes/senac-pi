@@ -2,10 +2,8 @@
 const STATUS_AGENDAMENTO_PENDENTE = 1; 
 const STATUS_AGENDAMENTO_CANCELADO = 2; 
 const STATUS_AGENDAMENTO_CONCLUIDO = 3; 
-
 const TIPO_USUARIO_FUNCIONARIO = 1;
 const TIPO_USUARIO_CLIENTE = 2;
-
 const STATUS_USUARIO_ATIVO = 1; 
 const STATUS_SERVICO_ATIVO = 1; 
 
@@ -53,7 +51,7 @@ class Usuario {
     public function get_status() {
         return $this -> status;
     }
-
+    //Funcao logar
     public function Logar($email, $senha)
     {
         $pdo = Banco::conectar();
@@ -80,6 +78,7 @@ class Usuario {
         }
     }
 }
+//Retorna todos ou ativos/inativos usuarios
 function obterUsuarios($tipo, $status) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -91,7 +90,7 @@ function obterUsuarios($tipo, $status) {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Retorna os todos ou ativos/inativos servicos 
 function obterServicos($status) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -103,7 +102,7 @@ function obterServicos($status) {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Dados grafico pizza
 function chartPie() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -111,7 +110,7 @@ function chartPie() {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Dados grafico linhas
 function chartLine() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -119,15 +118,15 @@ function chartLine() {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Dados grafico barras
 function chartBar($id) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT distinct month(data_hora) as mes, count(DATA_HORA) as ocorrencias from agendamento WHERE YEAR(DATA_HORA) = YEAR(CURRENT_DATE()) and ID_CLIENTE = '$id' group by month(DATA_HORA) ORDER BY DATA_HORA;";
+    $consulta = "SELECT distinct month(data_hora) as mes, count(DATA_HORA) as ocorrencias from agendamento WHERE YEAR(DATA_HORA) = YEAR(CURRENT_DATE()) and ID_FUNCIONARIO = '$id' group by month(DATA_HORA) ORDER BY DATA_HORA;";
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Funcao agendamentos (por id)
 function obterAgendamentos($id, $tipo, $status) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -139,7 +138,7 @@ function obterAgendamentos($id, $tipo, $status) {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Funcao todos agendamentos
 function obterTodosAgendamentos() {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -157,7 +156,7 @@ function obterTodosAgendamentos() {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
+//Funcao que retorna ultimo agendamento
 function validarUsuario($email) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -168,6 +167,4 @@ function validarUsuario($email) {
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
-
-
 ?>

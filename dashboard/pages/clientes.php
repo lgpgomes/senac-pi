@@ -7,62 +7,78 @@ $todosClientes = obterUsuarios(TIPO_USUARIO_CLIENTE, null);
 
 ?>
 <?php if ($tipo == 0) { ?>
-<div class="card">
-    <div class="card-header px-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="card-head">
-                <h5 class="card-title mb-0 py-1" style="color: <?php echo $color;?>">Clientes</h5>
-            </div>
-            <div class="d-flex">
-                <button type="button" class="btncadcliente btn btn-sm" style="color: <?php echo $color;?>" data-bs-toggle="modal" data-bs-target="#popupCliente"><i class="icon-plus fa fa-plus"></i> </button>
-            </div>
+<!-- Tabela Cliente -->
+<div class="card shadow mb-4">
+    <div class="card-header justify-content-between align-items-center d-flex">
+        <h6 id="titletable" class="m-0">Clientes</h6>
+        <button type="button" class="btn btn-outline-secondary btn-sm btncad-table" data-bs-toggle="modal" data-bs-target="#popupCliente"><i class="icon-plus fa fa-plus"></i> </button>
+    </div>
+    <div class="card-body">
+        <div class="tableAdmin table-responsive">
+            <table class="table table-sm table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Senha</th>
+                        <th>Status</th>          
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($todosClientes as $row) {?>
+                        <tr>
+                            <td><?php echo $row['ID']; ?></td>
+                            <td><?php echo $row['NOME']; ?></td> 
+                            <td><?php echo $row['EMAIL']; ?></td>
+                            <td><?php echo $row['SENHA']; ?></td>
+                            <td><?php echo $row['STATUS']; ?></td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn btn-outline-secondary" onclick="btncliente(this)" class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                        <span class="d-none d-xl-inline">Editar</span>
+                                    </button>
+                                    <?php if($row['STATUS'] == 1) {?>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="statusUser(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>, './pages/clientes.php')"> 
+                                        <i class="fa fa-user-times"></i>     
+                                        <span class="d-none d-xl-inline">Desativar</span>
+                                        </button>
+                                    <?php } if($row['STATUS'] == 0) { ?>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="statusUser(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>, './pages/clientes.php')">
+                                        <span class="fa fa-user-plus"></span> 
+                                        <span class="d-none d-xl-inline">Ativar</span>
+                                    <?php } ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="card-body p-4">
-        <div class="container-table">
-
-        <table class="table table-hover">
-            <thead>
-                <tr id="tr">
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Senha</th>
-                    <th>Tipo</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($todosClientes as $row) {?>
-                <tr>
-                    <td><?php echo $row['ID']; ?></td>
-                    <td><?php echo $row['NOME']; ?></td> 
-                    <td><?php echo $row['EMAIL']; ?></td>
-                    <td><?php echo $row['SENHA']; ?></td>
-                    <td><?php echo $row['TIPO']; ?></td>
-                    <td><?php echo $row['STATUS']; ?></td>
-                    <td class="table-buttons gap-1">
-                        <button type="button" onclick="btncliente(this)" class="btn btn-secondary btn-sm">
-                            <i class="fa fa-edit"></i>
-                            <span class="d-none d-sm-inline">Editar</span>
-                        </button>
-                        <?php if($row['STATUS'] == 1) {?>
-                        <button onclick="statusUser(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>, './pages/clientes.php')" type="button" class="btn btn-secondary btn-sm">
-                            <i class="fa fa-user-times"></i> 
-                            <span class="d-none d-sm-inline">Desativar</span>
-                        </button>
-                        <?php } ?>
-                        <?php if($row['STATUS'] == 0) {?>
-                        <button onclick="statusUser(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>, './pages/clientes.php')" type="button" class="btn btn-secondary btn-sm">
-                            <i class="fa fa-user-plus"></i>
-                            <span class="d-none d-sm-inline">Ativar</span>
-                        </button>
-                        <?php } ?>
-                    </td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    var table = $('#dataTable, #dataTable1, #dataTable2').DataTable({
+        responsive: true,
+        "language": {
+            "lengthMenu": "Mostrar _MENU_",
+            "zeroRecords": "Nada Encontrado : (",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro disponível",
+            "infoFiltered": "(de um total de _MAX_ registros)",
+            "sSearch": "Pesquisar:",
+            "oPaginate": {
+                "sPrevious": "Anterior",
+                "sNext": "Próxima"
+            }
+        },
+    });
+});
+</script>
+
 <?php } ?>
+

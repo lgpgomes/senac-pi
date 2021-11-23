@@ -81,7 +81,7 @@ $servicos = obterServicos(1);
             <div class="col-sm-12 col-md-6 align-items-center">
               <h1 class="titulo display-4">UMA NOVA EXPERIÊNCIA PARA UM ANTIGO HÁBITO</h1>
               <h2 class="subtitulo display-8">Faça um Agendamento Agora</h2>
-              <a href="#agendamento"><button class="btn"><i class="fa fa-calendar"></i> Agendar Agora</button></a>
+              <a href="./dashboard/dashboard.php"><button class="btn"><i class="fa fa-calendar"></i> Agendar Agora</button></a>
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@ $servicos = obterServicos(1);
             <p class="cta-text">
               Não perca tempo com incontáveis ligações para fazer uma reserva com o barbeiro, use MR. Barber!    
             </p>
-            <a href="./login/login.php"class="btn"> <i class="fa fa-check"></i> Agendar Agora </a>
+            <a href="./dashboard/dashboard.php"class="btn"> <i class="fa fa-check"></i> Agendar Agora </a>
           </div>
         </div>
       </div>

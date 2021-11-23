@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
+
 //Função Cadastrar Usuários
 function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
 {
@@ -63,9 +65,10 @@ function agendar($idServico, $date, $time, $status, $idFuncionario, $idCliente)
     if(validarAgendamento($data, $idFuncionario) -> rowCount() > 0){
         return 'Horário Ocupado!';
     }
-    else if ($data <= date('Y-m-d h:i:sa')) {
+    else if ($data <= date('Y-m-d H:i:s') || fimDeSemana($date) == true || $time < '08:00:00' || $time > '17:00:00') {
         return 'Data Inválida!';
     }
+    
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO `agendamento`(ID_SERV, DATA_HORA, STATUS, ID_FUNCIONARIO, ID_CLIENTE) VALUES (?,?,?,?,?)";
@@ -87,10 +90,16 @@ function resetPassword($email, $senha, $confirmar_senha)
     $q = $pdo->prepare($update);
     $q->execute(array($senha));
     Banco::desconectar();
+    return 'Sucesso!';
 }
 //Função Editar Usuários
 function editarUsuario($nome, $senha, $confirmar_senha, $id) 
 {
+    $erro = validarCampo('null', $nome, $senha, $confirmar_senha);
+    if (!empty($erro)) {
+        return $erro;
+    }
+    
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if (empty($senha)) {
@@ -164,6 +173,8 @@ function statusServ($idServico, $statusServico){
     Banco::desconectar();
 }
 
-
-
+function fimDeSemana($date) {
+    $weekDay = date('w', strtotime($date));
+    return ($weekDay == 0 || $weekDay == 6);
+}
 ?>

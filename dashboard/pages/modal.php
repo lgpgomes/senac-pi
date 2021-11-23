@@ -5,9 +5,9 @@ require_once '../../usuario/usuario.php';
 require_once '../util/connection.php';
 
 $funcionariosAtivos = obterUsuarios(TIPO_USUARIO_FUNCIONARIO, STATUS_USUARIO_ATIVO);
-$servicos = obterServicos(null);
+$servicos = obterServicos(STATUS_SERVICO_ATIVO);
 ?>
-
+<!--Modal Agendamento-->
 <div class="modal fade" id="popupAgendamento" tabindex="-1" aria-labelledby="popupAgendamentoLabel">
     <div class="modal-dialog modal-lg  modal-dialog-centered">
         <div class="modal-content">
@@ -76,6 +76,7 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>
+<!--Modal Cadastrar Funcionario-->
 <?php if ($tipo == 0) {?>
 <div class="modal fade" id="popupFuncionario" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
@@ -109,7 +110,7 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>
-                
+<!--Modal Cadastrar Servico-->
 <div class="modal fade" id="popupServico" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
         <div class="modal-content">
@@ -141,7 +142,7 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>  
-
+<!--Modal Cadastrar Cliente-->
 <div class="modal fade" id="popupCliente" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
         <div class="modal-content">
@@ -174,8 +175,7 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>
-</div>
-
+<!--Modal Editar Funcionario-->
 <div class="modal fade" id="editarFuncionario" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
         <div class="modal-content">
@@ -209,7 +209,7 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>
-
+<!--Modal Editar Cliente-->
 <div class="modal fade" id="editarCliente" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
         <div class="modal-content">
@@ -243,7 +243,7 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>
-
+<!--Modal Editar Servico-->
 <div class="modal fade" id="editarServico" tabindex="-1">
     <div class="modal-dialog modal-md  modal-dialog-centered">
         <div class="modal-content">

@@ -4,13 +4,14 @@ require_once '../../usuario/usuario.php';
 require_once '../util/connection.php';
 ?>
 
+<!--Home Administrador-->
 <?php if($tipo == 0) {
 $todosFuncionarios = obterUsuarios(TIPO_USUARIO_FUNCIONARIO, null);
 $todosClientes = obterUsuarios(TIPO_USUARIO_CLIENTE, null);
 $servicos = obterServicos(null);    
 ?>
-
-<div class="row mb-4 gx-4 gy-4" style="color: <?php echo $color?> !important">
+<!--Cards-->
+<div class="row mb-4 gx-2 gy-2" style="color: <?php echo $color?> !important">
     <div class="col">
         <div class="card shadow" style="border-left: 0.2rem solid;">
             <div class="card-body">
@@ -57,8 +58,8 @@ $servicos = obterServicos(null);
         </div>
     </div>
 </div>
-
-<div class="row">
+<!--Gráficos-->
+<div class="row gx-2 gy-2">
     <div class="col-xl-8 col-lg-7 ">
         <div class="card shadow mb-4">
             <div
@@ -87,15 +88,19 @@ $servicos = obterServicos(null);
     </div>
 </div>
 
-
 <?php 
+$domingo = 0;
 $segunda = 0;
 $terca = 0;
 $quarta = 0;
 $quinta = 0;
 $sexta = 0;
+$sabado = 0;
 
-foreach (chartLine()  as $row) { 
+foreach (chartLine()  as $row) {
+    if ($row['DAYOFWEEK(DATA_HORA)'] == 1) {
+        $domingo = $row['ocorrencias'];
+    }
     if ($row['DAYOFWEEK(DATA_HORA)'] == 2) {
         $segunda = $row['ocorrencias'];
     }
@@ -111,6 +116,9 @@ foreach (chartLine()  as $row) {
     if ($row['DAYOFWEEK(DATA_HORA)'] == 6) {
         $sexta = $row['ocorrencias'];
     }
+    if ($row['DAYOFWEEK(DATA_HORA)'] == 7) {
+        $sabado = $row['ocorrencias'];
+    }
 }
 ?>
 
@@ -120,7 +128,7 @@ var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: [
-       "Segunda", "Terça", "Quarta", "Quinta", "Sexta",
+        "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado",
     ],
     datasets: [{
       label: "",
@@ -135,7 +143,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "#17477F",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [<?php echo $segunda.','; echo $terca.','; echo $quarta.','; echo $quinta.','; echo $sexta ?>],
+      data: [<?php echo $domingo.','; echo $segunda.','; echo $terca.','; echo $quarta.','; echo $quinta.','; echo $sexta.','; echo $sabado; ?>],
     }],
   },
   options: {
@@ -186,14 +194,13 @@ var myPieChart = new Chart(ctx, {
 </script>
 <?php } ?>
 
+<!--Home Funcionario e Cliente-->
 <?php if($tipo == 1 || $tipo == 2) {
-
 $agendamentosPendentes = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_AGENDAMENTO_PENDENTE);
 $agendamentosCancelados = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_AGENDAMENTO_CANCELADO);
 $agendamentosConcluidos = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_AGENDAMENTO_CONCLUIDO);
-    
 ?>
-<div class="row mb-4 gx-4 gy-4" style="color: <?php echo $color?> !important">
+<div class="row mb-4 gx-2 gy-2" style="color: <?php echo $color?> !important">
     <div class="col">
         <div class="card shadow" style="border-left: 0.2rem solid;">
             <div class="card-body">
@@ -229,8 +236,8 @@ $agendamentosConcluidos = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_
             <div class="card-body">
                 <div class="row  align-items-center">
                     <div class="col mr-2">
-                        <div class="h5 mb-1"><?php echo $agendamentosConcluidos -> rowCount() ?></div>
-                        <div class="p mb-1"> Serviços Cadastrados </div>
+                        <div class="h5 mb-1"><?php echo $agendamentosCancelados -> rowCount() ?></div>
+                        <div class="p mb-1"> Agendamentos Cancelados </div>
                     </div>
                     <div class="col-auto">
                         <i class="fa fa-calendar fa-2x "></i>
@@ -240,7 +247,10 @@ $agendamentosConcluidos = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_
         </div>
     </div>
 </div>
+<?php } ?>
 
+<!--Home Funcionario-->
+<?php if($tipo == 1) {?>
 <div class="row justify-content-center">
     <div class="col-xl-8 col-lg-7 ">
         <div class="card shadow mb-4">
@@ -257,6 +267,7 @@ $agendamentosConcluidos = obterAgendamentos($usuario -> get_id(), $tipo, STATUS_
         </div>
     </div>
 </div>
+
 
 <script>
 var ctx = document.getElementById("myBarChart");
@@ -335,5 +346,42 @@ var myPieChart = new Chart(ctx, {
 });
 </script>
 <?php } ?>
+
+<!--Home Cliente-->
+<?php if($tipo == 2) {
+
+$agendamentosPendentes = obterAgendamentos($id, $tipo, STATUS_AGENDAMENTO_PENDENTE);
+
+?>
+<?php if($agendamentosPendentes -> rowCount() > 0) {?>
+<div class="card shadow mb-4">
+    <div class="card-header justify-content-between align-items-center d-flex">
+        <h6 id="titletable" class="m-0">Agendamentos Pendentes</h6>
+    </div>
+    <div class="card-body">
+        <div class="tableCliente table-responsive">
+            <table class="table table-sm table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th><?php echo $tipoUsuario;?></th>
+                        <th>Serviço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($agendamentosPendentes as $row) {?>
+                        <tr>
+                            <td><?php echo $row['data_hora']; ?></td>
+                            <td><?php echo $row['nome']; ?></td> 
+                            <td><?php echo $row['descricao']; ?></td>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?php } ?>
+<?php } ?>
+
 
 

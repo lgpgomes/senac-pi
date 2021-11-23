@@ -2,6 +2,8 @@
 require_once './cliente.php';
 require_once '../banco/banco.php';
 
+session_start();
+
 $mensagem = "";
 $divSuccess = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i>';
 $divError = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i>';
@@ -13,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmar_senha = $_POST['confirmar_senha'];
     $email = $_POST['email'];
     $mensagem = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, 2);
-    
-    if (empty($mensagem)) {
+    if ($mensagem == "Sucesso!") {
         $mensagem = $divSuccess.'Sucesso! Redirecionando...'.$div;
+        $_SESSION['loginEmail'] = $email;
         header('Refresh: 2; ../login/login.php');
     } else {
         $mensagem = $divError.$mensagem.$div;

@@ -6,45 +6,77 @@ require_once '../util/connection.php';
 $servicos = obterServicos(null);
 ?>
 <?php if($tipo == 0) {?>
-<div class="row">
-    <div class="col-auto">
-        <p class="h5">Serviços</p>
+<!-- Tabela dos Serviços -->
+<div class="card shadow mb-4">
+    <div class="card-header justify-content-between align-items-center d-flex">
+        <h6 id="titletable" class="m-0">Serviços</h6>
+        <button type="button" class="btn btn-outline-secondary btn-sm btncad-table" data-bs-toggle="modal" data-bs-target="#popupServico"><i class="icon-plus fa fa-plus"></i> </button>
     </div>
-    <div class="col-auto">
-        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#popupServico">
-            Cadastrar Serviço
-        </button>
+    <div class="card-body">
+        <div class="tableAdmin table-responsive">
+            <table class="table table-sm table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descrição</th>
+                        <th>Imagem</th>
+                        <th>Icone</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($servicos as $row) {?>
+                        <tr>
+                            <td><?php echo $row['ID']; ?></td>
+                            <td><?php echo $row['DESCRICAO']; ?></td> 
+                            <td><?php echo $row['IMAGEM']; ?></td>
+                            <td><?php echo $row['ICONE']; ?></td>
+                            <td><?php echo $row['STATUS']; ?></td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn btn-outline-secondary" onclick="btnserv(this)" class="btn btn-secondary btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                        <span class="d-none d-xl-inline">Editar</span>
+                                    </button>
+                                    <?php if($row['STATUS'] == 1) {?>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="statusServ(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>)"> 
+                                        <i class="fa fa-user-times"></i>     
+                                        <span class="d-none d-xl-inline">Desativar</span>
+                                        </button>
+                                    <?php } if($row['STATUS'] == 0) { ?>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="statusServ(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>)">
+                                        <span class="fa fa-user-plus"></span> 
+                                        <span class="d-none d-xl-inline">Ativar</span>
+                                    <?php } ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<table class="table table-sm table-striped table-hover">
-    <thead>
-        <tr id="tr">
-            <th>Id</th>
-            <th>Descrição</th>
-            <th>Imagem</th>
-            <th>Icone</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($servicos as $row) {?>
-        <tr>
-            <td><?php echo $row['ID']; ?></td>
-            <td><?php echo $row['DESCRICAO']; ?></td> 
-            <td><?php echo $row['IMAGEM']; ?></td>
-            <td><?php echo $row['ICONE']; ?></td>
-            <td><?php echo $row['STATUS']; ?></td>
-            <td>
-                <button type="button" onclick="btnserv(this)" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i> Editar</button>
-                <?php if($row['STATUS'] == 1) {?>
-                    <button onclick="statusServ(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>)" type="button"  class="btn btn-secondary btn-sm"><i class="fa fa-user-times"></i> Desativar</button>
-                <?php } ?>
-                <?php if($row['STATUS'] == 0) {?>
-                    <button onclick="statusServ(<?php echo $row['ID']; ?>, <?php echo $row['STATUS']; ?>)" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-user-plus"></i> Ativar</button>
-                <?php } ?>
-            </td>
-        </tr>
-        <?php } ?>
-    </tbody>
-</table>
+
+<script>
+//Datatable
+$(document).ready(function() {
+    var table = $('#dataTable').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ linhas por página",
+            "zeroRecords": "Nada Encontrado : (",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro disponível",
+            "infoFiltered": "(de um total de _MAX_ registros)",
+            "sSearch": "Pesquisar:",
+            "oPaginate": {
+                "sPrevious": "Anterior",
+                "sNext": "Próxima"
+            }
+        }
+    });
+});
+</script>
+
 <?php } ?>

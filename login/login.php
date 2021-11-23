@@ -2,6 +2,7 @@
 <?php
 require_once '../usuario/usuario.php';
 require_once '../banco/banco.php';
+session_start();
 
 $mensagem = "";
 
@@ -9,16 +10,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $usuario = new Usuario($email, $senha);
-
     if($usuario -> Logar($email, $senha)) {
         header('Location: ../dashboard/dashboard.php');
     }
     else {
         $mensagem = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i> <span> Email ou Senha Inválidos!</span> </div>';
+        $_SESSION['resetEmail'] = $email;
     }
 }
-?>
 
+if(!empty($_POST['email'])) {
+    $inputEmail = $_POST['email'];
+} 
+else if (!empty($_SESSION['loginEmail'])) {
+    $inputEmail = $_SESSION['loginEmail'];
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -97,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <form action="login.php" method="POST">
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    <input type="email"  <?php if (!empty($_POST['email'])){echo "value=\"".$_POST["email"]."\"";}?> name="email" class="form-control" placeholder="Email" required>
+                                    <input type="email" <?php if (!empty($inputEmail)){echo "value=\"".$inputEmail."\"";}?> name="email" class="form-control" placeholder="Email" required>
                                 </div>
                                 <div class="input-group form-group py-1">
                                     <span class="input-group-text"><i class="fa fa-lock"></i></span>

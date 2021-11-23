@@ -1,5 +1,4 @@
 <?php
-
 //Cadastra Servicos
 if (isset($_POST['cadDescricaoServico'])) {
     $descricao = $_POST['cadDescricaoServico'];
@@ -7,15 +6,16 @@ if (isset($_POST['cadDescricaoServico'])) {
     $caminho_imagem = "../../assets/uploads/img/".basename($imagem_nome);
     $icone_nome = str_replace(" ", "_", $_FILES['icone']['name']);
     $caminho_icone = "../../assets/uploads/icons/".basename($icone_nome);
+    $tamanhoImagem = $_FILES['imagem']['size'];
+    $tamanhoIcone = $_FILES['icone']['size'];
     move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem);
     move_uploaded_file($_FILES['icone']['tmp_name'], $caminho_icone);
     $msg = cadastrarServico($descricao, $imagem_nome, $icone_nome);
     if ($msg == "Sucesso!") {
-        $msg = "Sucesso! Serviço Cadastrado!";
+        $msg = "Serviço Cadastrado!";
         $event = 1;
     } else {
         $event = 0;
-        $msg = "Erro";
     }
     
 }
@@ -27,7 +27,7 @@ if (isset($_POST['cadNomeFunc'])) {
     $email = $_POST['cadEmailFunc'];
     $msg = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, TIPO_USUARIO_FUNCIONARIO);
     if ($msg == "Sucesso!") {
-        $msg = "Sucesso! Funcionário Cadastrado!";
+        $msg = "Funcionário Cadastrado!";
         $event = 1;
     } else {
         $event = 0;
@@ -41,7 +41,7 @@ if (isset($_POST['cadNomeClient'])) {
     $email = $_POST['cadEmailClient'];
     $msg = cadastrarUsuario($nome, $senha, $confirmar_senha, $email, TIPO_USUARIO_CLIENTE);
     if ($msg == "Sucesso!") {
-        $msg = "Sucesso! Cliente Cadastrado!";
+        $msg = "Cliente Cadastrado!";
         $event = 1;
     } else {
         $event = 0;
@@ -55,15 +55,19 @@ if (isset($_POST['editDescricaoServico'])) {
     $icone_nome = "";
     if(!empty($_FILES['imagem'])) {
         $imagem_nome = str_replace(" ", "_", $_FILES['imagem']['name']);
-        $caminho_imagem = "../assets/uploads/img/".basename($imagem_nome);
-        $icone_nome = str_replace(" ", "_", $_FILES['icone']['name']);
-        $caminho_icone = "../assets/uploads/icons/".basename($icone_nome);
+        $caminho_imagem = "../../assets/uploads/img/".basename($imagem_nome);
+        $tamanhoImagem = $_FILES['imagem']['size'];
         move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem);
+    } 
+    if(!empty($_FILES['icone'])) {
+        $icone_nome = str_replace(" ", "_", $_FILES['icone']['name']);
+        $caminho_icone = "../../assets/uploads/icons/".basename($icone_nome);
+        $tamanhoIcone = $_FILES['icone']['size'];
         move_uploaded_file($_FILES['icone']['tmp_name'], $caminho_icone);
     }
     $msg = editarServico($descricao, $imagem_nome, $icone_nome, $id);
     if ($msg == "Sucesso!") {
-        $msg = "Sucesso! Serviço Alterado!";
+        $msg = "Serviço Alterado!";
         $event = 1;
     } else {
         $event = 0;
@@ -77,13 +81,12 @@ if (isset($_POST['editNomeUser'])) {
     $id =  $_POST['editIdUser'];
     $msg = editarUsuario($nome, $senha, $confirmar_senha, $id);
     if ($msg == "Sucesso!") {
-        $msg = "Sucesso! Usuário Alterado!";
+        $msg = "Usuário Alterado!";
         $event = 1;
     } else {
         $event = 0;
     }
 }
-
 //Muda status agendamento  
 if (isset($_POST['statusAgend'])) {
     $id = $_POST['idAgend'];
@@ -111,7 +114,7 @@ if (isset($_POST['idUser'])) {
     }
     statusUser($id, $status);
 }
-
+//Funcao de agendamento
 if (isset($_POST['date'])) {
     $date = $_POST['date'];
     $time = $_POST['time'];
@@ -125,6 +128,10 @@ if (isset($_POST['date'])) {
         $event = 0;  
     }
 } 
+ob_start();
+
+ob_end_clean();
+
 if(isset($msg)) {
     $data = array();
     $data['event'] = $event;
@@ -133,6 +140,7 @@ if(isset($msg)) {
         echo json_encode($data);
     }
 }
+
 
 
 ?>

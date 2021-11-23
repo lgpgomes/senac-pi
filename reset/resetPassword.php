@@ -3,12 +3,13 @@
 require_once '../clientes/cliente.php';
 require_once '../banco/banco.php';
 
+session_start();
+
 $mensagem = "";
 $divSuccess = '<div id="msg" class="msgSucesso"><i class="fa fa-check"></i>';
 $divError = '<div id="msg" class="msgErro"><i class="fa fa-exclamation-triangle"></i>';
 $div = '</div>';
 
-session_start();
 if(empty($_SESSION['token'])) {
     header('Location: reset.php');
     session_destroy();
@@ -21,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $mensagem = resetPassword($email, $nova_senha, $confirmar_nova_senha);
 
-    if(empty($mensagem)) {
+    if($mensagem == "Sucesso!") {
         $mensagem = $divSuccess.'Sucesso! Redirecionando...'.$div;
         header('Refresh: 2; ../login/login.php');
         session_destroy();
