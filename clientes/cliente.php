@@ -17,8 +17,17 @@ function cadastrarUsuario($nome, $senha, $confirmar_senha, $email, $tipo)
     return "Sucesso!";
 }
 //Função Cadastrar Serviços
-function cadastrarServico($descricao, $imagem_nome, $icone_nome)
+function cadastrarServico($descricao, $imagem_nome, $icone_nome, $tamanhoImagem, $tamanhoIcone)
 {
+    if(empty($descricao) || empty($imagem_nome) || empty($icone_nome)){
+        return "Há Campos Vazios!";
+    }
+    if($tamanhoImagem != 0) {
+        return "A Imagem É Maior Que 500kb!";
+    }
+    if($tamanhoIcone != 0) {
+        return "O Ícone É Maior Que 100kb";
+    }
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $insert = "INSERT INTO servico(`Descricao`, `Imagem`, `Icone`, Status) VALUES (?,?,?,?)";
@@ -28,8 +37,14 @@ function cadastrarServico($descricao, $imagem_nome, $icone_nome)
     return "Sucesso!";
 }
 //Função Editar Serviços
-function editarServico($descricao, $imagem_nome, $icone_nome, $id)
+function editarServico($descricao, $imagem_nome, $icone_nome, $id, $tamanhoImagem, $tamanhoIcone)
 {
+    if($tamanhoImagem != 0) {
+        return "A Imagem É Maior Que 500kb!";
+    }
+    if($tamanhoIcone != 0) {
+        return "O Ícone É Maior Que 100kb";
+    }
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if (empty($icone_nome) && empty($imagem_nome)) {

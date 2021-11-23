@@ -2,22 +2,35 @@
 //Cadastra Servicos
 if (isset($_POST['cadDescricaoServico'])) {
     $descricao = $_POST['cadDescricaoServico'];
-    $imagem_nome = str_replace(" ", "_", $_FILES['imagem']['name']);
-    $caminho_imagem = "../../assets/uploads/img/".basename($imagem_nome);
-    $icone_nome = str_replace(" ", "_", $_FILES['icone']['name']);
-    $caminho_icone = "../../assets/uploads/icons/".basename($icone_nome);
-    $tamanhoImagem = $_FILES['imagem']['size'];
-    $tamanhoIcone = $_FILES['icone']['size'];
-    move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem);
-    move_uploaded_file($_FILES['icone']['tmp_name'], $caminho_icone);
-    $msg = cadastrarServico($descricao, $imagem_nome, $icone_nome);
+    $imagem_nome = ""; 
+    $icone_nome = "";
+    $tamanhoImagem = "";
+    $tamanhoIcone = "";
+    if(!empty($_FILES['imagem']) && !empty($_FILES['icone'])) {
+        //Imagem
+        $imagem_nome = str_replace(" ", "_", $_FILES['imagem']['name']);
+        $caminho_imagem = "../../assets/uploads/img/".basename($imagem_nome);
+        $tamanhoImagem = $_FILES['imagem']['size'];
+        if( $tamanhoImagem < 500000){
+            $tamanhoImagem = 0;
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem);
+        }
+        //Icone
+        $icone_nome = str_replace(" ", "_", $_FILES['icone']['name']);
+        $caminho_icone = "../../assets/uploads/icons/".basename($icone_nome);
+        $tamanhoIcone = $_FILES['icone']['size'];
+        if( $tamanhoIcone < 100000){
+            $tamanhoIcone = 0;
+            move_uploaded_file($_FILES['icone']['tmp_name'], $caminho_icone);
+        }
+    }
+    $msg = cadastrarServico($descricao, $imagem_nome, $icone_nome, $tamanhoImagem, $tamanhoIcone);
     if ($msg == "Sucesso!") {
         $msg = "Serviço Cadastrado!";
         $event = 1;
     } else {
         $event = 0;
     }
-    
 }
 //Cadastra Funcionario
 if (isset($_POST['cadNomeFunc'])) {
@@ -53,19 +66,27 @@ if (isset($_POST['editDescricaoServico'])) {
     $id = $_POST['editIdServico'];
     $imagem_nome = ""; 
     $icone_nome = "";
+    $tamanhoImagem = "";
+    $tamanhoIcone = "";
     if(!empty($_FILES['imagem'])) {
         $imagem_nome = str_replace(" ", "_", $_FILES['imagem']['name']);
         $caminho_imagem = "../../assets/uploads/img/".basename($imagem_nome);
         $tamanhoImagem = $_FILES['imagem']['size'];
-        move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem);
+        if( $tamanhoImagem < 500000){
+            $tamanhoImagem = 0;
+            move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem);
+        }
     } 
     if(!empty($_FILES['icone'])) {
         $icone_nome = str_replace(" ", "_", $_FILES['icone']['name']);
         $caminho_icone = "../../assets/uploads/icons/".basename($icone_nome);
         $tamanhoIcone = $_FILES['icone']['size'];
-        move_uploaded_file($_FILES['icone']['tmp_name'], $caminho_icone);
+        if( $tamanhoIcone < 100000){
+            $tamanhoIcone = 0;
+            move_uploaded_file($_FILES['icone']['tmp_name'], $caminho_icone);
+        }
     }
-    $msg = editarServico($descricao, $imagem_nome, $icone_nome, $id);
+    $msg = editarServico($descricao, $imagem_nome, $icone_nome, $id, $tamanhoImagem, $tamanhoIcone);
     if ($msg == "Sucesso!") {
         $msg = "Serviço Alterado!";
         $event = 1;
