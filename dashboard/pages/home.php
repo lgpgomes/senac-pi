@@ -364,7 +364,7 @@ $agendamentosPendentes = obterAgendamentos($id, $tipo, STATUS_AGENDAMENTO_PENDEN
                 <thead>
                     <tr>
                         <th>Data</th>
-                        <th><?php echo $tipoUsuario;?></th>
+                        <th>Profissional</th>
                         <th>Serviço</th>
                     </tr>
                 </thead>
@@ -385,7 +385,7 @@ $agendamentosPendentes = obterAgendamentos($id, $tipo, STATUS_AGENDAMENTO_PENDEN
     <div class="row">
         <div class="col">
             <?php if ($tipo == 2) { ?>
-                <p class="h4"> Você não fez nenhum agendamento ainda... </p>
+                <p class="h4"> Você não tem nenhum agendamento pendente... </p>
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#popupAgendamento">
                     Fazer Agendamento!
                 </button>

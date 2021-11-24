@@ -160,7 +160,7 @@ function obterTodosAgendamentos() {
 function ultimoAgendamento($id) {
     $pdo = Banco::conectar();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $consulta = "SELECT DATE_FORMAT(agendamento.DATA_HORA, '%Y-%m-%d') as DATA_HORA FROM agendamento WHERE ID_CLIENTE = '$id' LIMIT 1";
+    $consulta = "SELECT DATE_FORMAT(agendamento.DATA_HORA, '%Y-%m-%d') as DATA_HORA FROM agendamento WHERE ID_CLIENTE = '$id' ORDER BY agendamento.DATA_HORA DESC LIMIT 1 ";
     Banco::desconectar();
     return $pdo -> query($consulta);
 }
