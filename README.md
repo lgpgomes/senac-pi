@@ -18,21 +18,14 @@ ADM:
  - Login
  - Cadastra funcionários;
  - Cadastra serviços;
- - Cadastra clientes;
+ - Cadastra clientes.
  
 Funcionário:
  - Login
- - Consulta agendamentos;
+ - Consulta agendamentos.
  
 Cliente:
  - Login
  - Consultar agendamentos (agendamentos status pendente);
  - Consulta histórico de agentamentos (agentamentos status concluído);
- - Agendar serviço (funcionários ativos);
- 
-  
-Criar redes sociais - (Victor)
-
-Twitter 
-Facebook
-Instagram
+ - Agendar serviço (funcionários ativos).
