@@ -35,7 +35,7 @@ $servicos = obterServicos(STATUS_SERVICO_ATIVO);
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <input type="date" name="date" min="<?php echo date('Y-m-d');?>" max="2021-12-25" class="form-control" id="data" required >
+                            <input type="date" name="date" min="<?php echo date('Y-m-d');?>" max="2022-12-25" class="form-control" id="data" required >
                         </div>
                         <div class="col-sm-6" >
                             <select name="time" id="hora" class="form-select" >

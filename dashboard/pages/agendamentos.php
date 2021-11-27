@@ -34,7 +34,7 @@ $todosAgendamentos = obterTodosAgendamentos();
                 <tbody>
                     <?php foreach($todosAgendamentos as $row) {?>
                         <tr>
-                            <td><?php echo $row['DATA_HORA']; ?></td>
+                            <td><?php echo date("d/m/Y - H:i", strtotime($row['DATA_HORA'])) ; ?></td>
                             <td><?php echo $row['DESCRICAO']; ?></td> 
                             <td><?php echo $row['NOME_CLIENTE']; ?></td>
                             <td><?php echo $row['NOME_FUNCIONARIO']; ?></td> 
@@ -75,7 +75,7 @@ $agendamentosConcluidos = obterAgendamentos($id, $tipo, STATUS_AGENDAMENTO_CONCL
                 <tbody>
                     <?php foreach($agendamentosPendentes as $row) {?>
                         <tr>
-                            <td><?php echo $row['data_hora']; ?></td>
+                            <td><?php echo date("d/m/Y - H:i", strtotime($row['data_hora'])) ; ?></td>
                             <td><?php echo $row['nome']; ?></td> 
                             <td><?php echo $row['descricao']; ?></td>
                             <?php if ($tipo == 1) { ?>
@@ -120,7 +120,7 @@ $agendamentosConcluidos = obterAgendamentos($id, $tipo, STATUS_AGENDAMENTO_CONCL
                 <tbody>
                     <?php foreach($agendamentosConcluidos as $row) {?>
                         <tr>
-                            <td><?php echo $row['data_hora']; ?></td>
+                            <td><?php echo date("d/m/Y - H:i", strtotime($row['data_hora'])) ; ?></td>
                             <td><?php echo $row['nome']; ?></td> 
                             <td><?php echo $row['descricao']; ?></td>
                         </tr>
@@ -150,7 +150,7 @@ $agendamentosConcluidos = obterAgendamentos($id, $tipo, STATUS_AGENDAMENTO_CONCL
                 <tbody>
                     <?php foreach($agendamentosCancelados as $row) {?>
                         <tr>
-                            <td><?php echo $row['data_hora']; ?></td>
+                            <td><?php echo date("d/m/Y - H:i", strtotime($row['data_hora'])) ; ?></td>
                             <td><?php echo $row['nome']; ?></td> 
                             <td><?php echo $row['descricao']; ?></td>
                         </tr>

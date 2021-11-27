@@ -77,7 +77,7 @@ function agendar($idServico, $date, $time, $status, $idFuncionario, $idCliente)
     if(validarAgendamento($data, $idFuncionario) -> rowCount() > 0){
         return 'Horário Ocupado!';
     }
-    else if ($data <= date('Y-m-d H:i:s') || fimDeSemana($date) == true || $time < '08:00:00' || $time > '17:00:00') {
+    else if ($data <= date('Y-m-d H:i:s') || fimDeSemana($date) == true || $time < '08:00:00' || $time > '17:00:00' || $time != '') {
         return 'Data Inválida!';
     }
     
